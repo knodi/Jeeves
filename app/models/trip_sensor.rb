@@ -1,0 +1,2 @@
+class TripSensor < Device
+end
