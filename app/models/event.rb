@@ -4,7 +4,7 @@ class Event < ApplicationRecord
   after_create :mark_as_newest
   
   def mark_as_newest
-    if self.device && (self.device.current_state.nil? || self.created_at > self.device.current_state.created_at)
+    if self.device && (self.device.latest_event.nil? || self.created_at > self.device.latest_event.created_at)
       self.device.update_attribute(:latest_event_id, self.id) 
     end
   end
