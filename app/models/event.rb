@@ -1,5 +1,4 @@
 class Event < ApplicationRecord
-  attr_accessible :device_id, :label, :notifier
   belongs_to :device
   
   after_create :mark_as_newest

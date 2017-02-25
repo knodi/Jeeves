@@ -5,12 +5,13 @@ class SpeechEngine
   }[RUBY_PLATFORM]
 
   def self.say(sentence)
-    case OS 
+    pid = case OS 
     when 'raspberrypi'
-      Process.daemon(%Q{echo "#{sentence}" | festival --tts})
+      spawn(%Q{echo "#{sentence}" | festival --tts})
     when 'osx'
-      Process.daemon(%Q{say "#{sentence}"})
+      spawn(%Q{say "#{sentence}"})
     end
+    Process.detach(pid)
   end
   
 end
