@@ -12,7 +12,7 @@
 
 ActiveRecord::Schema.define(version: 20170225044249) do
 
-  create_table "devices", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+  create_table "devices", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
     t.string   "type"
     t.integer  "room_id"
@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 20170225044249) do
     t.datetime "updated_at",      null: false
   end
 
-  create_table "events", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+  create_table "events", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "label"
     t.integer  "device_id",                  null: false
     t.boolean  "notified",   default: false
@@ -29,12 +29,12 @@ ActiveRecord::Schema.define(version: 20170225044249) do
     t.datetime "updated_at",                 null: false
   end
 
-  create_table "rooms", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+  create_table "rooms", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string  "name"
     t.integer "floor"
   end
 
-  create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+  create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "username"
     t.string   "password"
     t.string   "email"
