@@ -1,0 +1,2 @@
+#!/bin/bash
+ssh pi@raspberrypi.local "mysqldump -uroot --add-drop-table jeeves_production" | mysql -uroot jeeves_development
