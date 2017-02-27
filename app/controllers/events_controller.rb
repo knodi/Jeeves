@@ -18,8 +18,11 @@ class EventsController < ApplicationController
   end
   
   def index
-    @events = @device.events unless @device.nil?
-    render json: @events.to_json
+    @events = @device.events.order("id DESC").limit(20) unless @device.nil?
+    respond_to do |format|
+      format.json { render json: @events.to_json }
+      format.html
+    end
   end
   
 private

@@ -1,0 +1,22 @@
+<div class="standard_table" id="devices">
+  <table>
+    <tr><th>Room</th><th>Device</th><th>ID</th><th>Last Activity</th></tr>
+
+    <% @devices.each do |device| %>
+      <tr>
+        <td><%= device.room.name.titlecase %></td>
+        <td><%= device.name.titlecase %></td>
+        <td><%= link_to device.id, events_path(d: device.id) %></td>
+        <td>
+        <% if device.latest_event %>
+          "<%= device.latest_event.label.capitalize %>"
+          <%= time_ago_in_words(device.latest_event.try(:created_at)) %>
+          ago
+        <% else %>
+          -
+        <% end %>  
+        </td>
+      </tr>
+    <% end %>
+  </table>
+</div>
