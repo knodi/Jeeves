@@ -7,16 +7,29 @@ class SpeechEngine
   @@volume = 100
 
   class << self
+
     def say(sentence, options = {})
       if options[:volume] && options[:volume] != @@volume
         volume = options[:volume]
       end
 
-      cmd = speech_command(sentence)
-      Rails.logger.info("Speech engine executing command: #{cmd.inspect}")
-      pid = spawn()
-      Process.detach pid
+      run_command speech_command(sentence)
     end
+
+    def volume
+      @@volume
+    end
+
+    # this command can take a while, be aware that it's possible
+    # for the engine to begin speaking before volume is fully set
+    def volume=(new_volume)
+      if @@volume != new_volume
+        @@volume = new_volume
+        run_command volume_command(new_volume)
+      end
+    end
+
+    private
 
     def speech_command(sentence = 'thing happened')
       case OS_LOOKUP[RUBY_PLATFORM]
@@ -25,19 +38,6 @@ class SpeechEngine
       when 'osx'
         %Q{say "#{sentence}"}
       end
-    end
-
-    def volume
-      @@volume
-    end
-
-    #this command can take a while, be aware that it's possible for the engine to finish speaking before volume is fully set
-    def volume=(new_volume)
-      @@volume = new_volume
-      cmd = volume_command(new_volume)
-      Rails.logger.info cmd
-      pid = spawn(cmd)
-      Process.detach(pid)
     end
 
     def volume_command(new_volume)
@@ -52,5 +52,10 @@ class SpeechEngine
       end
     end
 
+    def run_command(cmd)
+      Rails.logger.info "SpeechEngine.run_command(#{cmd.inspect})"
+      pid = spawn(cmd)
+      Process.detach(pid)
+    end
   end
 end

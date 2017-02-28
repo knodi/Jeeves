@@ -1,6 +1,14 @@
 class EventsController < ApplicationController
   before_action :load_device
 
+  def index
+    @events = @device.events.order("id DESC").limit(20) unless @device.nil?
+    respond_to do |format|
+      format.json { render json: @events.to_json }
+      format.html
+    end
+  end
+
   def new
     if params[:l].blank? || @device.blank?
       render nothing: true
@@ -16,14 +24,15 @@ class EventsController < ApplicationController
       end
     end
   end
-  
-  def index
-    @events = @device.events.order("id DESC").limit(20) unless @device.nil?
-    respond_to do |format|
-      format.json { render json: @events.to_json }
-      format.html
-    end
+
+  def respeak
+    return if params[:e].blank?
+    event = Event.find(params[:e])
+    SpeechEngine.say event.label
+  ensure
+    redirect_back fallback_location: root_path
   end
+
   
 private
   def load_device

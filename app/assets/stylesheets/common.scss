@@ -1,5 +1,6 @@
 /* styles common to all pages */
 .standard_table {
-  table { border-collapse: collapse; }
+  border-collapse: collapse;
+
   td, th { border: solid black 1px; padding: 5px }
 }

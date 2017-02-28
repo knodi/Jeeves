@@ -14,6 +14,5 @@ module Jeeves
     config.autoload_paths << Rails.root.join('lib')
 
     config.time_zone = 'Central Time (US & Canada)'
-
   end
 end
