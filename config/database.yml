@@ -6,7 +6,7 @@ default: &default
   pool: 5
   timeout: 5000
 
-development:
+development: &development
   <<: *default
   database: jeeves_development
 

@@ -38,8 +38,8 @@ private
   def load_device
     unless params[:d].blank?
       @device = (params[:d] =~ /^\d+$/) ? 
-        TripSensor.find_by(id: params[:d]) :
-        TripSensor.where(["name like ?", '%'+params[:d]+'%']).first
+        Device.find_by(id: params[:d]) :
+        Device.where(["name like ?", '%'+params[:d]+'%']).first
     end
   end
 end
