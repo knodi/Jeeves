@@ -1,12 +1,14 @@
 AllCops:
-  Includes:
+  Include:
     - Rakefile
     - config.ru
-  Excludes:
+  Exclude:
     - db/**
     - config/**
     - script/**
 Documentation:
+  Enabled: false
+Style/DotPosition:
   Enabled: false
 Style/HashSyntax:
   Enabled: false
@@ -14,10 +16,15 @@ Style/EmptyLines:
   Enabled: false
 Style/EmptyLinesAroundClassBody:
   Enabled: false
-Style/DotPosition:
+Style/FrozenStringLiteralComment:
   Enabled: false
 Style/MultilineMethodCallIndentation:
   Enabled: false
+Style/TrailingCommaInLiteral: 
+  Enabled: false
+Style/TrivialAccessors:
+  Enabled: false
+  IgnoreClassMethods: true
 Metrics/LineLength:
   Enabled: false
 Metrics/ClassLength:
