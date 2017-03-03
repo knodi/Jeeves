@@ -2,7 +2,7 @@ class EventsController < ApplicationController
   before_action :load_device
 
   def index
-    @events = @device.events.order("id DESC").limit(20) unless @device.nil?
+    @events = @device.events.order('id DESC').limit(20) unless @device.nil?
     respond_to do |format|
       format.json { render json: @events.to_json }
       format.html
@@ -13,7 +13,7 @@ class EventsController < ApplicationController
     if params[:l].blank? || @device.blank?
       render nothing: true
     else
-      event = Event.new(label: params[:l], device_id: @device.id) 
+      event = Event.new(label: params[:l], device_id: @device.id)
       event.save
       if event.errors.any?
         render text: "Error: #{event.errors.to_a.inspect}"
@@ -33,13 +33,14 @@ class EventsController < ApplicationController
     redirect_back fallback_location: root_path
   end
 
-  
-private
+  private
+
   def load_device
-    unless params[:d].blank?
-      @device = (params[:d] =~ /^\d+$/) ? 
-        Device.find_by(id: params[:d]) :
-        Device.where(["name like ?", '%'+params[:d]+'%']).first
-    end
+    return if params[:d].blank?
+    @device = if params[:d].match?(/^\d+$/)
+                Device.find_by(id: params[:d])
+              else
+                Device.where(['name like ?', "%#{params[:d]}%"]).first
+              end
   end
 end
