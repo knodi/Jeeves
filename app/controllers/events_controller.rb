@@ -20,7 +20,7 @@ class EventsController < ApplicationController
       else
         render text: 'Registered'
         logger.debug "About to speak the sentence #{params[:l].inspect}"
-        SpeechEngine.say params[:l]
+        SpeechEngine.say(params[:l], volume: proper_volume)
       end
     end
   end
@@ -28,7 +28,7 @@ class EventsController < ApplicationController
   def respeak
     return if params[:e].blank?
     event = Event.find(params[:e])
-    SpeechEngine.say event.label
+    SpeechEngine.say(event.label)
   ensure
     redirect_back fallback_location: root_path
   end
@@ -42,5 +42,14 @@ class EventsController < ApplicationController
               else
                 Device.where(['name like ?', "%#{params[:d]}%"]).first
               end
+  end
+
+  def proper_volume
+    # 9am to 8pm
+    if (9..19).cover?(Time.now.in_time_zone.hour)
+      100
+    else
+      40
+    end
   end
 end
