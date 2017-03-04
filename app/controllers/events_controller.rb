@@ -47,9 +47,9 @@ class EventsController < ApplicationController
   def proper_volume
     # 9am to 8pm
     if (9..19).cover?(Time.now.in_time_zone.hour)
-      100
+      80
     else
-      40
+      50
     end
   end
 end
