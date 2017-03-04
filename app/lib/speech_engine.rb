@@ -42,7 +42,9 @@ class SpeechEngine
       scale_to_range = ->(value, range) { range[((range.size - 1) * (value.to_i.clamp(0, 100) / 100.0)).round] }
       case OS_LOOKUP[RUBY_PLATFORM]
       when 'raspberrypi'
-        scaled_volume = scale_to_range.call(new_volume, (-10_239..400).to_a)
+        # raspberry pi's actual volume range is -10239..400, but anything below -3900 is inaudible
+        # scaled_volume = scale_to_range.call(new_volume, (-10_239..400).to_a)
+        scaled_volume = scale_to_range.call(new_volume, (-3900..400).to_a)
         %(amixer set PCM -- #{scaled_volume})
       when 'osx'
         scaled_volume = scale_to_range.call(new_volume, (0..7).step(0.1).to_a.map { |x| x.round(1) })
@@ -52,7 +54,7 @@ class SpeechEngine
 
     def run_command(cmd)
       Rails.logger.info "SpeechEngine.run_command(#{cmd.inspect})"
-      pid = spawn(cmd)
+      pid = spawn(cmd, [:out, :err] => File::NULL)
       Process.detach(pid)
     end
   end
