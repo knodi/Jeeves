@@ -49,7 +49,7 @@ class EventsController < ApplicationController
     if (9..19).cover?(Time.now.in_time_zone.hour)
       80
     else
-      50
+      60
     end
   end
 end
