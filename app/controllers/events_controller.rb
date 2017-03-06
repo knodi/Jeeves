@@ -1,5 +1,6 @@
 class EventsController < ApplicationController
   before_action :load_device
+  before_action :authenticate_user!
 
   def index
     @events = @device.events.order('id DESC').limit(20) unless @device.nil?

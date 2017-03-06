@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 gem 'byebug'
 gem 'coffee-rails', '~> 4.2'
+gem 'devise'
 gem 'jquery-rails'
 gem 'listen', '~> 3.0.5'
 gem 'mysql2'
