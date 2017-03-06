@@ -1,5 +1,6 @@
 class EventsController < ApplicationController
   before_action :load_device
+  before_action :load_event, only: [:respeak]
   before_action :authenticate_user!
 
   def index
@@ -11,25 +12,23 @@ class EventsController < ApplicationController
   end
 
   def new
-    if params[:l].blank? || @device.blank?
+    if params[:label].blank? || @device.blank?
       render nothing: true
     else
-      event = Event.new(label: params[:l], device_id: @device.id)
+      event = Event.new(label: params[:label], device_id: @device.id)
       event.save
       if event.errors.any?
         render text: "Error: #{event.errors.to_a.inspect}"
       else
         render text: 'Registered'
-        logger.debug "About to speak the sentence #{params[:l].inspect}"
-        SpeechEngine.say(params[:l], volume: proper_volume)
+        logger.debug "About to speak the sentence #{event.pretty_label.inspect}"
+        SpeechEngine.say(event.pretty_label, volume: proper_volume)
       end
     end
   end
 
   def respeak
-    return if params[:e].blank?
-    event = Event.find(params[:e])
-    SpeechEngine.say(event.label)
+    SpeechEngine.say(@event.pretty_label)
   ensure
     redirect_back fallback_location: root_path
   end
@@ -37,12 +36,17 @@ class EventsController < ApplicationController
   private
 
   def load_device
-    return if params[:d].blank?
-    @device = if params[:d].match?(/^\d+$/)
-                Device.find_by(id: params[:d])
+    return if params[:device_id].blank?
+    @device = if params[:device_id].match?(/^\d+$/)
+                Device.find_by(id: params[:device_id])
               else
-                Device.where(['name like ?', "%#{params[:d]}%"]).first
+                Device.where(['name like ?', "%#{params[:device_id]}%"]).first
               end
+  end
+
+  def load_event
+    return if params[:event_id].blank?
+    @event = Event.find(params[:event_id])
   end
 
   def proper_volume

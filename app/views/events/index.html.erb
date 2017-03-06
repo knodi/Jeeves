@@ -5,10 +5,10 @@
     <% @events.each do |event| %>
       <tr>
         <td><%= event.id %></td>
-        <td><%= event.label.titlecase %></td>
-        <td><%= event.created_at.in_time_zone.strftime('%I:%M %P') %></td>
-        <td><%= event.created_at.in_time_zone.strftime('%m/%d/%Y') %></td>
-        <td><%= link_to image_tag('sound.png', size: '15'), events_respeak_path(e: event.id), remote: true %></td>
+        <td><%= event.pretty_label %></td>
+        <td><%= event.time %></td>
+        <td><%= event.date %></td>
+        <td><%= link_to image_tag('sound.png', size: '15'), device_event_respeak_path(event_id: event.id), remote: true %></td>
       </tr>
     <% end %>
   </table>

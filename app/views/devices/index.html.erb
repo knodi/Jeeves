@@ -1,15 +1,14 @@
 <div id="devices">
   <table class="standard_table">
-    <tr><th>Room</th><th>Device</th><th>ID</th><th>Last Activity</th></tr>
+    <tr><th>Room</th><th>Device</th><th>Last Activity</th></tr>
 
     <% @devices.each do |device| %>
       <tr>
         <td><%= device.room.name.titlecase %></td>
-        <td><%= device.name.titlecase %></td>
-        <td><%= link_to device.id, events_path(d: device.id) %></td>
+        <td><%= link_to device.name.titlecase, device_events_path(device) %></td>
         <td>
         <% if device.latest_event %>
-          "<%= device.latest_event.label.capitalize %>"
+          <%= device.latest_event.simple_label %>
           <%= time_ago_in_words(device.latest_event.try(:created_at)) %>
           ago
         <% else %>

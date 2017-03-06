@@ -34,7 +34,8 @@ class AddDeviseToUsers < ActiveRecord::Migration[5.0]
       # Uncomment below if timestamps were not included in your original model.
       # t.timestamps null: false
     end
-
+    remove_column :users, :password
+    
     add_index :users, :email,                unique: true
     # add_index :users, :reset_password_token, unique: true
     # add_index :users, :confirmation_token,   unique: true
