@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<!-- saved from url=(0057)http://wiki.micasaverde.com/index.php/Luup_Lua_extensions -->
+<html lang="en" dir="ltr" class="client-js"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Luup Lua extensions - MiCasaVerde</title>
+
+<meta name="generator" content="MediaWiki 1.19.8">
+<link rel="shortcut icon" href="http://wiki.micasaverde.com/favicon.ico">
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.micasaverde.com/opensearch_desc.php" title="MiCasaVerde (en)">
+<link rel="EditURI" type="application/rsd+xml" href="http://wiki.micasaverde.com/api.php?action=rsd">
+<link rel="alternate" type="application/atom+xml" title="MiCasaVerde Atom feed" href="http://wiki.micasaverde.com/index.php?title=Special:RecentChanges&amp;feed=atom">
+<link rel="stylesheet" href="./luup_files/load.php">
+<style type="text/css" media="all">.js-messagebox{margin:1em 5%;padding:0.5em 2.5%;border:1px solid #ccc;background-color:#fcfcfc;font-size:0.8em}.js-messagebox .js-messagebox-group{margin:1px;padding:0.5em 2.5%;border-bottom:1px solid #ddd}.js-messagebox .js-messagebox-group:last-child{border-bottom:thin none transparent}
+
+/* cache key: micasaverde_wiki:resourceloader:filter:minify-css:7:8b08bdc91c52a9ffba396dccfb5b473c */
+
+
+.mw-collapsible-toggle{float:right} li .mw-collapsible-toggle{float:none} .mw-collapsible-toggle-li{list-style:none}
+
+/* cache key: micasaverde_wiki:resourceloader:filter:minify-css:7:4250852ed2349a0d4d0fc6509a3e7d4c */
+</style><meta name="ResourceLoaderDynamicStyles" content="">
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: micasaverde_wiki:resourceloader:filter:minify-css:7:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+
+<script src="./luup_files/load(1).php"></script><script src="./luup_files/load(2).php"></script>
+<script>if(window.mw){
+mw.config.set({"wgCanonicalNamespace":"","wgCanonicalSpecialPageName":false,"wgNamespaceNumber":0,"wgPageName":"Luup_Lua_extensions","wgTitle":"Luup Lua extensions","wgCurRevisionId":8309,"wgArticleId":467,"wgIsArticle":true,"wgAction":"view","wgUserName":null,"wgUserGroups":["*"],"wgCategories":["Development"],"wgBreakFrames":false,"wgPageContentLanguage":"en","wgSeparatorTransformTable":["",""],"wgDigitTransformTable":["",""],"wgRelevantPageName":"Luup_Lua_extensions","wgRestrictionEdit":[],"wgRestrictionMove":[]});
+}</script><script>if(window.mw){
+mw.loader.implement("user.options",function($){mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,
+"watchlistdays":3,"watchlisthideanons":0,"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;},{},{});mw.loader.implement("user.tokens",function($){mw.user.tokens.set({"editToken":"+\\","watchToken":false});;},{},{});
+
+/* cache key: micasaverde_wiki:resourceloader:filter:minify-js:7:9983699ab6150ffa89a90653b2338ac8 */
+}</script>
+<script>if(window.mw){
+mw.loader.load(["mediawiki.page.startup","mediawiki.legacy.wikibits","mediawiki.legacy.ajax"]);
+}</script><script type="text/javascript" src="./luup_files/load(3).php"></script>
+<style type="text/css">/*<![CDATA[*/
+.source-lua {line-height: normal;}
+.source-lua li, .source-lua pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for lua
+ * CSS class: source-lua, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.lua.source-lua .de1, .lua.source-lua .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.lua.source-lua  {font-family:monospace;}
+.lua.source-lua .imp {font-weight: bold; color: red;}
+.lua.source-lua li, .lua.source-lua .li1 {font-weight: normal; vertical-align:top;}
+.lua.source-lua .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.lua.source-lua .li2 {font-weight: bold; vertical-align:top;}
+.lua.source-lua .kw1 {color: #b1b100;}
+.lua.source-lua .co1 {color: #808080; font-style: italic;}
+.lua.source-lua .coMULTI {color: #808080; font-style: italic;}
+.lua.source-lua .es0 {color: #000099; font-weight: bold;}
+.lua.source-lua .br0 {color: #66cc66;}
+.lua.source-lua .sy0 {color: #66cc66;}
+.lua.source-lua .st0 {color: #ff0000;}
+.lua.source-lua .nu0 {color: #cc66cc;}
+.lua.source-lua .me0 {color: #b1b100;}
+.lua.source-lua .ln-xtra, .lua.source-lua li.ln-xtra, .lua.source-lua div.ln-xtra {background-color: #ffc;}
+.lua.source-lua span.xtra { display:block; }
+
+/*]]>*/
+</style>
+<style type="text/css">/*<![CDATA[*/
+@import "/index.php?title=MediaWiki:Geshi.css&usemsgcache=yes&action=raw&ctype=text/css&smaxage=18000";
+/*]]>*/
+</style><!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--><style type="text/css">
+:root #content > #center > .dose > .dosesingle,
+:root #content > #right > .dose > .dosesingle
+{ display: none !important; }</style></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-Luup_Lua_extensions skin-vector action-view">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content" class="mw-body">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;" class="js-messagebox"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">
+				<span dir="auto">Luup Lua extensions</span>
+			</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From MiCasaVerde</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav" class="mw-jump">
+					Jump to: <a href="http://wiki.micasaverde.com/index.php/Luup_Lua_extensions#mw-head">navigation</a>,
+					<a href="http://wiki.micasaverde.com/index.php/Luup_Lua_extensions#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr"><p>In addition to the [<a rel="nofollow" class="external text" href="http://lua.org/">Lua</a>] commands described in the [<a rel="nofollow" class="external text" href="http://www.lua.org/manual/5.1/">Lua reference manual</a>], you can also reference in your Lua code variables and functions from modules which the Luup engine provides as follows: 
+</p>
+<table id="toc" class="toc"><tbody><tr><td><div id="toctitle"><h2>Contents</h2><span class="toctoggle">&nbsp;[<a href="http://wiki.micasaverde.com/index.php/Luup_Lua_extensions#" class="internal" id="togglelink">hide</a>]&nbsp;</span></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="http://wiki.micasaverde.com/index.php/Luup_Lua_extensions#Module:_luup"><span class="tocnumber">1</span> <span class="toctext">Module: luup</span></a>
+<ul>
+<li class="toclevel-2 tocsection-2"><a href="http://wiki.micasaverde.com/index.php/Luup_Lua_extensions#variable:_device"><span class="tocnumber">1.1</span> <span class="toctext">variable: device</span></a></li>
+<li class="toclevel-2 tocsection-3"><a href="http://wiki.micasaverde.com/index.php/Luup_Lua_extensions#variable:_version.2C_version_branch.2C_version_major.2C_version_minor"><span class="tocnumber">1.2</span> <span class="toctext">variable: version, version_branch, version_major, version_minor</span></a></li>
+<li class="toclevel-2 tocsection-4"><a href="http://wiki.micasaverde.com/index.php/Luup_Lua_extensions#variable:_longitude"><span class="tocnumber">1.3</span> <span class="toctext">variable: longitude</span></a></li>
+<li class="toclevel-2 tocsection-5"><a href="http://wiki.micasaverde.com/index.php/Luup_Lua_extensions#variable:_latitude"><span class="tocnumber">1.4</span> <span class="toctext">variable: latitude</span></a></li>
+<li class="toclevel-2 tocsection-6"><a href="http://wiki.micasaverde.com/index.php/Luup_Lua_extensions#variable:_timezone"><span class="tocnumber">1.5</span> <span class="toctext">variable: timezone</span></a></li>
+<li class="toclevel-2 tocsection-7"><a href="http://wiki.micasaverde.com/index.php/Luup_Lua_extensions#variable:_city"><span class="tocnumber">1.6</span> <span class="toctext">variable: city</span></a></li>
+<li class="toclevel-2 tocsection-8"><a href="http://wiki.micasaverde.com/index.php/Luup_Lua_extensions#variable:_devices"><span class="tocnumber">1.7</span> <span class="toctext">variable: devices</span></a></li>
+<li class="toclevel-2 tocsection-9"><a href="http://wiki.micasaverde.com/index.php/Luup_Lua_extensions#variable:_rooms"><span class="tocnumber">1.8</span> <span class="toctext">variable: rooms</span></a></li>
+<li class="toclevel-2 tocsection-10"><a href="http://wiki.micasaverde.com/index.php/Luup_Lua_extensions#variable:_scenes"><span class="tocnumber">1.9</span> <span class="toctext">variable: scenes</span></a></li>
+<li class="toclevel-2 tocsection-11"><a href="http://wiki.micasaverde.com/index.php/Luup_Lua_extensions#variable:_remotes"><span class="tocnumber">1.10</span> <span class="toctext">variable: remotes</span></a></li>
+<li class="toclevel-2 tocsection-12"><a href="http://wiki.micasaverde.com/index.php/Luup_Lua_extensions#variable:_event_server"><span class="tocnumber">1.11</span> <span class="toctext">variable: event_server</span></a></li>
+<li class="toclevel-2 tocsection-13"><a href="http://wiki.micasaverde.com/index.php/Luup_Lua_extensions#variable:_ra_server"><span class="tocnumber">1.12</span> <span class="toctext">variable: ra_server</span></a></li>
+<li class="toclevel-2 tocsection-14"><a href="http://wiki.micasaverde.com/index.php/Luup_Lua_extensions#variable:_pk_accesspoint"><span class="tocnumber">1.13</span> <span class="toctext">variable: pk_accesspoint</span></a></li>
+<li class="toclevel-2 tocsection-15"><a href="http://wiki.micasaverde.com/index.php/Luup_Lua_extensions#variable:_hw_key"><span class="tocnumber">1.14</span> <span class="toctext">variable: hw_key</span></a></li>
+<li class="toclevel-2 tocsection-16"><a href="http://wiki.micasaverde.com/index.php/Luup_Lua_extensions#function:_log"><span class="tocnumber">1.15</span> <span class="toctext">function: log</span></a></li>
+<li class="toclevel-2 tocsection-17"><a href="http://wiki.micasaverde.com/index.php/Luup_Lua_extensions#function:_task"><span class="tocnumber">1.16</span> <span class="toctext">function: task</span></a></li>
+<li class="toclevel-2 tocsection-18"><a href="http://wiki.micasaverde.com/index.php/Luup_Lua_extensions#function:_call_delay"><span class="tocnumber">1.17</span> <span class="toctext">function: call_delay</span></a></li>
+<li class="toclevel-2 tocsection-19"><a href="http://wiki.micasaverde.com/index.php/Luup_Lua_extensions#function:_call_timer"><span class="tocnumber">1.18</span> <span class="toctext">function: call_timer</span></a></li>
+<li class="toclevel-2 tocsection-20"><a href="http://wiki.micasaverde.com/index.php/Luup_Lua_extensions#function:_is_ready"><span class="tocnumber">1.19</span> <span class="toctext">function: is_ready</span></a></li>
+<li class="toclevel-2 tocsection-21"><a href="http://wiki.micasaverde.com/index.php/Luup_Lua_extensions#function:_call_action"><span class="tocnumber">1.20</span> <span class="toctext">function: call_action</span></a></li>
+<li class="toclevel-2 tocsection-22"><a href="http://wiki.micasaverde.com/index.php/Luup_Lua_extensions#function:_variable_set"><span class="tocnumber">1.21</span> <span class="toctext">function: variable_set</span></a></li>
+<li class="toclevel-2 tocsection-23"><a href="http://wiki.micasaverde.com/index.php/Luup_Lua_extensions#function:_variable_get"><span class="tocnumber">1.22</span> <span class="toctext">function: variable_get</span></a></li>
+<li class="toclevel-2 tocsection-24"><a href="http://wiki.micasaverde.com/index.php/Luup_Lua_extensions#function:_attr_set"><span class="tocnumber">1.23</span> <span class="toctext">function: attr_set</span></a></li>
+<li class="toclevel-2 tocsection-25"><a href="http://wiki.micasaverde.com/index.php/Luup_Lua_extensions#function:_attr_get"><span class="tocnumber">1.24</span> <span class="toctext">function: attr_get</span></a></li>
+<li class="toclevel-2 tocsection-26"><a href="http://wiki.micasaverde.com/index.php/Luup_Lua_extensions#function:_ip_set"><span class="tocnumber">1.25</span> <span class="toctext">function: ip_set</span></a></li>
+<li class="toclevel-2 tocsection-27"><a href="http://wiki.micasaverde.com/index.php/Luup_Lua_extensions#function:_mac_set"><span class="tocnumber">1.26</span> <span class="toctext">function: mac_set</span></a></li>
+<li class="toclevel-2 tocsection-28"><a href="http://wiki.micasaverde.com/index.php/Luup_Lua_extensions#function:_reload"><span class="tocnumber">1.27</span> <span class="toctext">function: reload</span></a></li>
+<li class="toclevel-2 tocsection-29"><a href="http://wiki.micasaverde.com/index.php/Luup_Lua_extensions#function:_create_device"><span class="tocnumber">1.28</span> <span class="toctext">function: create_device</span></a></li>
+<li class="toclevel-2 tocsection-30"><a href="http://wiki.micasaverde.com/index.php/Luup_Lua_extensions#function:_device_message"><span class="tocnumber">1.29</span> <span class="toctext">function: device_message</span></a></li>
+<li class="toclevel-2 tocsection-31"><a href="http://wiki.micasaverde.com/index.php/Luup_Lua_extensions#function:_register_handler"><span class="tocnumber">1.30</span> <span class="toctext">function: register_handler</span></a></li>
+<li class="toclevel-2 tocsection-32"><a href="http://wiki.micasaverde.com/index.php/Luup_Lua_extensions#function:_variable_watch"><span class="tocnumber">1.31</span> <span class="toctext">function: variable_watch</span></a></li>
+<li class="toclevel-2 tocsection-33"><a href="http://wiki.micasaverde.com/index.php/Luup_Lua_extensions#function:_job_watch"><span class="tocnumber">1.32</span> <span class="toctext">function: job_watch</span></a></li>
+<li class="toclevel-2 tocsection-34"><a href="http://wiki.micasaverde.com/index.php/Luup_Lua_extensions#function:_devices_by_service"><span class="tocnumber">1.33</span> <span class="toctext">function: devices_by_service</span></a></li>
+<li class="toclevel-2 tocsection-35"><a href="http://wiki.micasaverde.com/index.php/Luup_Lua_extensions#function:_device_supports_service"><span class="tocnumber">1.34</span> <span class="toctext">function: device_supports_service</span></a></li>
+<li class="toclevel-2 tocsection-36"><a href="http://wiki.micasaverde.com/index.php/Luup_Lua_extensions#function:_set_failure"><span class="tocnumber">1.35</span> <span class="toctext">function: set_failure</span></a></li>
+<li class="toclevel-2 tocsection-37"><a href="http://wiki.micasaverde.com/index.php/Luup_Lua_extensions#function:_is_night"><span class="tocnumber">1.36</span> <span class="toctext">function: is_night</span></a></li>
+<li class="toclevel-2 tocsection-38"><a href="http://wiki.micasaverde.com/index.php/Luup_Lua_extensions#function:_sleep"><span class="tocnumber">1.37</span> <span class="toctext">function: sleep</span></a></li>
+<li class="toclevel-2 tocsection-39"><a href="http://wiki.micasaverde.com/index.php/Luup_Lua_extensions#function:_sunset_.2F_sunrise"><span class="tocnumber">1.38</span> <span class="toctext">function: sunset / sunrise</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-40"><a href="http://wiki.micasaverde.com/index.php/Luup_Lua_extensions#Module:_luup.inet"><span class="tocnumber">2</span> <span class="toctext">Module: luup.inet</span></a>
+<ul>
+<li class="toclevel-2 tocsection-41"><a href="http://wiki.micasaverde.com/index.php/Luup_Lua_extensions#function:_wget"><span class="tocnumber">2.1</span> <span class="toctext">function: wget</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-42"><a href="http://wiki.micasaverde.com/index.php/Luup_Lua_extensions#Module:_luup.chdev"><span class="tocnumber">3</span> <span class="toctext">Module: luup.chdev</span></a>
+<ul>
+<li class="toclevel-2 tocsection-43"><a href="http://wiki.micasaverde.com/index.php/Luup_Lua_extensions#function:_start"><span class="tocnumber">3.1</span> <span class="toctext">function: start</span></a></li>
+<li class="toclevel-2 tocsection-44"><a href="http://wiki.micasaverde.com/index.php/Luup_Lua_extensions#function:_append"><span class="tocnumber">3.2</span> <span class="toctext">function: append</span></a></li>
+<li class="toclevel-2 tocsection-45"><a href="http://wiki.micasaverde.com/index.php/Luup_Lua_extensions#function:_sync"><span class="tocnumber">3.3</span> <span class="toctext">function: sync</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-46"><a href="http://wiki.micasaverde.com/index.php/Luup_Lua_extensions#Module:_io"><span class="tocnumber">4</span> <span class="toctext">Module: io</span></a>
+<ul>
+<li class="toclevel-2 tocsection-47"><a href="http://wiki.micasaverde.com/index.php/Luup_Lua_extensions#function:_open"><span class="tocnumber">4.1</span> <span class="toctext">function: open</span></a></li>
+<li class="toclevel-2 tocsection-48"><a href="http://wiki.micasaverde.com/index.php/Luup_Lua_extensions#function:_write"><span class="tocnumber">4.2</span> <span class="toctext">function: write</span></a></li>
+<li class="toclevel-2 tocsection-49"><a href="http://wiki.micasaverde.com/index.php/Luup_Lua_extensions#function:_intercept"><span class="tocnumber">4.3</span> <span class="toctext">function: intercept</span></a></li>
+<li class="toclevel-2 tocsection-50"><a href="http://wiki.micasaverde.com/index.php/Luup_Lua_extensions#function:_read"><span class="tocnumber">4.4</span> <span class="toctext">function: read</span></a></li>
+<li class="toclevel-2 tocsection-51"><a href="http://wiki.micasaverde.com/index.php/Luup_Lua_extensions#function:_is_connected"><span class="tocnumber">4.5</span> <span class="toctext">function: is_connected</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-52"><a href="http://wiki.micasaverde.com/index.php/Luup_Lua_extensions#Module:_luup.job"><span class="tocnumber">5</span> <span class="toctext">Module: luup.job</span></a>
+<ul>
+<li class="toclevel-2 tocsection-53"><a href="http://wiki.micasaverde.com/index.php/Luup_Lua_extensions#function:_status"><span class="tocnumber">5.1</span> <span class="toctext">function: status</span></a></li>
+<li class="toclevel-2 tocsection-54"><a href="http://wiki.micasaverde.com/index.php/Luup_Lua_extensions#function:_set"><span class="tocnumber">5.2</span> <span class="toctext">function: set</span></a></li>
+<li class="toclevel-2 tocsection-55"><a href="http://wiki.micasaverde.com/index.php/Luup_Lua_extensions#function:_setting"><span class="tocnumber">5.3</span> <span class="toctext">function: setting</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-56"><a href="http://wiki.micasaverde.com/index.php/Luup_Lua_extensions#Notes"><span class="tocnumber">6</span> <span class="toctext">Notes</span></a>
+<ul>
+<li class="toclevel-2 tocsection-57"><a href="http://wiki.micasaverde.com/index.php/Luup_Lua_extensions#device:_string_or_number"><span class="tocnumber">6.1</span> <span class="toctext">device: string or number</span></a></li>
+</ul>
+</li>
+</ul>
+</td></tr></tbody></table>
+<h2> <span class="mw-headline" id="Module:_luup"> Module: luup  </span></h2>
+<p>These are general purpose functions and variables. Call them by using the luup. module, such as:<br> 
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="lua source-lua"><pre class="de1">luup.<span class="kw1">log</span><span class="br0">(</span><span class="st0">'Now running version: '</span> .. luup.version<span class="br0">)</span></pre></div></div> 
+<h3> <span class="mw-headline" id="variable:_device"> variable: device  </span></h3>
+<p>The ID of this device instance, if it's running as part of a device 
+</p>
+<h3> <span class="mw-headline" id="variable:_version.2C_version_branch.2C_version_major.2C_version_minor"> variable: version, version_branch, version_major, version_minor  </span></h3>
+<p><i>version</i> contains the version of the luup engine, such as "1.0.843", as a string. The version consists of 3 numbers separated by a period: the branch, the major version, and the minor version. To make it easier to compare against a minimum acceptable version, <i>version_branch, version_major and version_minor</i> return each component as a number. You can put a comparison in the startup function in your Luup plugin and return false if the minimum version isn't met. The user will then see that the Luup device's startup check failed:<br> 
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="lua source-lua"><pre class="de1"><span class="kw1">if</span><span class="br0">(</span> version_branch ~<span class="sy0">=</span> <span class="nu0">1</span> <span class="kw1">or</span> version_major ~<span class="sy0">=</span> <span class="nu0">0</span> <span class="kw1">or</span> version_minor <span class="sy0">&lt;</span> <span class="nu0">843</span> <span class="br0">)</span> <span class="kw1">then</span>
+    luup.<span class="kw1">log</span><span class="br0">(</span><span class="st0">"I need version 1.0.843 minimum to run"</span><span class="br0">)</span>
+    <span class="kw1">return</span> <span class="kw1">false</span>
+<span class="kw1">end</span></pre></div></div> 
+<h3> <span class="mw-headline" id="variable:_longitude"> variable: longitude  </span></h3>
+<p>Contains the longitude as a number, as found on the location tab in the setup UI. 
+</p>
+<h3> <span class="mw-headline" id="variable:_latitude"> variable: latitude  </span></h3>
+<p>Contains the latitude as a number, as found on the location tab in the setup UI. 
+</p>
+<h3> <span class="mw-headline" id="variable:_timezone"> variable: timezone  </span></h3>
+<p>Contains the timezone as a number of hours offset from UTC, as found on the location tab in the setup UI.  It accounts for DST, so, for example, Pacific Standard time will be -8 or -9 depending on DST.
+</p><p><b>Note:</b> Contains 0 for MiOS &lt; 1.5.250 (Vera V2) / &lt; 1.5.249 (Vera V3).
+</p>
+<h3> <span class="mw-headline" id="variable:_city"> variable: city  </span></h3>
+<p>Contains the city as a string, as found on the location tab in the setup UI. 
+</p>
+<h3> <span class="mw-headline" id="variable:_devices"> variable: devices  </span></h3>
+<p>Contains all the devices in the system as a table indexed by the device number.
+</p><p>The members are:
+</p>
+<ul><li> <b>room_num</b>: (number) This is the number of the room the device is in. 
+</li><li> <b>device_type</b>: (string) This is a string representing the type of the device.
+</li><li> <b>category_num</b>: (number) This is a category for the device.  See: <a href="http://wiki.micasaverde.com/index.php/Luup_Device_Categories" title="Luup Device Categories">Luup_Device_Categories</a> for a list. 
+</li><li> <b>subcategory_num</b>: (number) This is a sub category for the device.
+</li><li> <b>device_num_parent</b>: (number) This is the number of the parent device. See: <a href="http://wiki.micasaverde.com/index.php?title=Lua_Device_Structure&amp;action=edit&amp;redlink=1" class="new" title="Lua Device Structure (page does not exist)">Lua Device Structure</a> for details. 
+</li><li> <b>ip</b>: (string) If this device is IP based, this is the IP address. 
+</li><li> <b>mac</b>: (string) If this device is IP based, this is the MAC address. 
+</li><li> <b>user</b>: (string) If this device is IP based and requires http authentication, this is the username
+</li><li> <b>pass</b>: (string) If this device is IP based and requires http authentication, this is the password
+</li><li> <b>id</b>: (string) If this device has an internal ID that is specific to the device, it is contained here. For example, for Z-Wave devices this is the Node ID, and for Insteon device it is the Insteon ID. 
+</li><li> <b>embedded</b>: (boolean) If this device is embedded, it means that it doesn't have its own room or exist as a separate device. It should be considered part of its parent. Like a 3-in-1 sensor is a device with 3 embedded child devices. 
+</li><li> <b>hidden</b>: (boolean) If true the user checked the 'hidden' box and doesn't want to see the device on the dashboard. 
+</li><li> <b>invisible</b>: (boolean) If true the device is 'for internal use only' and shouldn't be presented to the user. 
+</li><li> <b>description</b>: (string) This is the text description for the device as supplied by the user in the web UI. 
+</li><li> <b>udn</b>: (string) This is the UDN for the UPnP device.
+</li></ul>
+<p><br>
+Example to log device #5's IP address and its internal ID:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="lua source-lua"><pre class="de1">luup.<span class="kw1">log</span><span class="br0">(</span><span class="st0">'Device #5 ip: '</span> .. luup.devices<span class="br0">[</span><span class="nu0">5</span><span class="br0">]</span>.ip .. <span class="st0">' id: '</span> .. luup.devices<span class="br0">[</span><span class="nu0">5</span><span class="br0">]</span>.id<span class="br0">)</span></pre></div></div> 
+<p><br>
+This code will log all the attributes from all the devices:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="lua source-lua"><pre class="de1"><span class="kw1">for</span> k, v <span class="kw1">in</span> <span class="kw1">pairs</span><span class="br0">(</span>luup.devices<span class="br0">)</span> <span class="kw1">do</span>
+    <span class="kw1">for</span> k2, v2 <span class="kw1">in</span> <span class="kw1">pairs</span><span class="br0">(</span>v<span class="br0">)</span> <span class="kw1">do</span>
+        luup.<span class="kw1">log</span><span class="br0">(</span><span class="st0">"Device #"</span> .. k .. <span class="st0">":"</span> .. k2 .. <span class="st0">"="</span> .. <span class="kw1">tostring</span><span class="br0">(</span>v2<span class="br0">)</span><span class="br0">)</span>
+    <span class="kw1">end</span>
+<span class="kw1">end</span>
+&nbsp;
+<span class="kw1">return</span> <span class="kw1">true</span></pre></div></div>
+<p>Note: if an attribute is modified, it will not persist between Luup engine restarts. You need to use <a href="http://wiki.micasaverde.com/index.php/Luup_Lua_extensions#function:_attr_set" title="Luup Lua extensions">luup.attr_set</a> instead. Eg:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="lua source-lua"><pre class="de1"><span class="kw1">local</span> ipAddress <span class="sy0">=</span> <span class="st0">'192.168.l.l2'</span>
+&nbsp;
+<span class="co1">-- this will not persist between restarts</span>
+luup.devices<span class="br0">[</span>lul_device<span class="br0">]</span>.ip <span class="sy0">=</span> ipAddress
+&nbsp;
+<span class="co1">-- this will persist between restarts</span>
+luup.attr_set<span class="br0">(</span><span class="st0">'ip'</span>, ipAddress, lul_device<span class="br0">)</span></pre></div></div>
+<h3> <span class="mw-headline" id="variable:_rooms"> variable: rooms  </span></h3>
+<p>Contains all the rooms as a table of strings indexed by the room number. Example:<br> 
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="lua source-lua"><pre class="de1">luup.<span class="kw1">log</span><span class="br0">(</span><span class="st0">'Room #1 is called: '</span> .. luup.rooms<span class="br0">[</span><span class="nu0">1</span><span class="br0">]</span><span class="br0">)</span></pre></div></div> 
+<h3> <span class="mw-headline" id="variable:_scenes"> variable: scenes  </span></h3>
+<p>Contains all the scenes in the system as a table indexed by the scene number. The members are: room_num (number), description(string), hidden(boolean)
+</p>
+<h3> <span class="mw-headline" id="variable:_remotes"> variable: remotes  </span></h3>
+<p>Contains all the remotes in the system as a table indexed by the remote id. The members are: remote_file (string), room_num (number), description(string) 
+</p>
+<h3> <span class="mw-headline" id="variable:_event_server"> variable: event_server </span></h3>
+<p>type: string
+</p><p>Contains the notification/event server. On UI5 it can be either <i>cms1.mios.com</i> or <i>cms2.mios.com</i>.
+</p>
+<h3> <span class="mw-headline" id="variable:_ra_server"> variable: ra_server </span></h3>
+<p>type: string
+</p><p>Contains the remote access server. Can be either <i>fwd1.mios.com</i> or <i>fwd2.mios.com</i>.
+</p>
+<h3> <span class="mw-headline" id="variable:_pk_accesspoint"> variable: pk_accesspoint </span></h3>
+<p>type: number
+</p><p>Contains the serial number of this Vera.
+</p>
+<h3> <span class="mw-headline" id="variable:_hw_key"> variable: hw_key </span></h3>
+<p>type: string
+</p><p>Contains the Vera hardware key.
+</p>
+<h3> <span class="mw-headline" id="function:_log"> function: log  </span></h3>
+<p>parameters: what_to_log (string), log_level (optional, number) 
+</p><p>return: nothing 
+</p><p>Writes what_to_log to the log, /var/log/cmh/LuaUPnP.log, with the given log_level, which is 50 by default. See: <a href="http://wiki.micasaverde.com/index.php/Luup_Loglevels" title="Luup Loglevels">Luup Loglevels</a> 
+</p>
+<h3> <span class="mw-headline" id="function:_task"> function: task  </span></h3>
+<p>parameters: message (string), status (number), description (string), handle (number) 
+</p><p>return: handle (number) 
+</p><p>When the Luup engine is starting status messages are displayed for the various modules as they're initialized. Normally each device, including Luup devices, automatically log their status and the user is shown an error if the device doesn't start, such as if the 'startup' function returns an error. 
+</p><p>If you have other startup sequences which you want the user to see to know that startup hasn't finished yet, call this function passing in a handle of -1 for the first call. The status should be: 1=Busy, 2=Error, 4=Successful. Message is the current state, such as 'downloading', and description describes the module, like 'Smartphone UI'. After the first call, store the handle and pass it on future calls to update the status rather than add a new one. 
+</p>
+<h3> <span class="mw-headline" id="function:_call_delay"> function: call_delay  </span></h3>
+<p>parameters: function_name (string), seconds (number), data (string), thread (bool) 
+</p><p>returns: result (number) 
+</p><p>The function <i>function_name</i> (the first parameter), which must be passed as a string, will be called in <i>seconds</i> seconds (the second parameter), and will be passed the string <i>data</i>. The function returns 0 if successful. See: <a href="http://wiki.micasaverde.com/index.php/Luup_Declarations#timed_function_callback" title="Luup Declarations">Luup Declarations#timed_function_callback</a> for the names and syntax of the parameters that will be passed to function_name. function_name will only be called once and you must call call_delay again if you want it called again, or use call_timer instead. 
+</p><p>If thread is specified and is true or 1, the call back will be made in it's own thread and can block if needed. Normally it is called by a worker thread and is expected to return immediately.
+</p><p>As of December 19, 2011, for all builds after 1.5.237, the 'thread' will be ignored.  Each Lua state has its own worker thread now, so all calls to call_delay and call_timer will occur in a separate thread.
+</p>
+<h3> <span class="mw-headline" id="function:_call_timer"> function: call_timer  </span></h3>
+<p>parameters: function_name (string), type (number), time (string), days (string), data (string) 
+</p><p>returns: result (number) 
+</p><p>The function 'function_name', which must be passed as a string, will be called when the timer is triggered, and will be passed the string 'data'. The function returns 0 if successful. See: <a href="http://wiki.micasaverde.com/index.php/Luup_Declarations#timed_function_callback" title="Luup Declarations">Luup Declarations#timed_function_callback</a> for the names and syntax of the parameters that will be passed to function_name. 
+</p><p>Type is 1=Interval timer, 2=Day of week timer, 3=Day of month timer, 4=Absolute timer. For an interval timer, days is not used, and Time should be a number of seconds, minutes, or hours using an optional 'h' or 'm' suffix. Example: 30=call in 30 seconds, 5m=call in 5 minutes, 2h=call in 2 hours. For a day of week timer, Days is a comma separated list with the days of the week where 1=Monday and 7=Sunday. Time is the time of day in hh:mm:ss format. Time can also include an 'r' at the end for Sunrise or a 't' for Sunset and the time is relative to sunrise/sunset. For example: Days="3,5" Time="20:30:00" means your function will be called on the next Wed or Fri at 8:30pm. Days="1,7" Time="-3:00:00r" means your function will be called on the next Monday or Sunday 3 hours before sunrise. Day of month works the same way except Days is a comma separated list of days of the month, such as "15,20,30". For an absolute timer, Days is not used, and Time should be in the format: "yyyy-mm-dd hh:mm:ss" 
+</p><p>Data can be a string passed back to the function. The function should be declared so it takes a single argument, which is this data.<br> 
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="lua source-lua"><pre class="de1"><span class="kw1">function</span> refreshCache<span class="br0">(</span>stuff<span class="br0">)</span>
+    ....
+<span class="kw1">end</span>
+&nbsp;
+<span class="kw1">function</span> startup<span class="br0">(</span><span class="br0">)</span>
+    <span class="co1">--</span>
+    <span class="co1">-- Setup an interval-based timer to call refreshCache after 30 minutes.</span>
+    <span class="co1">-- Note that if you want it to "recur" then you need to call this function again</span>
+    <span class="co1">-- at the end of the refreshCache() implementation.</span>
+    <span class="co1">--</span>
+    luup.call_timer<span class="br0">(</span><span class="st0">"refreshCache"</span>, <span class="nu0">1</span>, <span class="st0">"30m"</span>, <span class="st0">""</span>, <span class="st0">"SomeStuff"</span><span class="br0">)</span>
+<span class="kw1">end</span></pre></div></div> 
+<h3> <span class="mw-headline" id="function:_is_ready"> function: is_ready  </span></h3>
+<p>parameters: <a href="http://wiki.micasaverde.com/index.php/Luup_Lua_extensions#device:_string_or_number" title="Luup Lua extensions">device (string or number)</a>
+</p><p>returns: ready (boolean) 
+</p><p>version: UI5 and above
+</p><p>Checks whether a device has successfully completed it's startup sequence. If so, is_ready returns true. If your device shouldn't process incoming data until the startup sequence is finished, you may want to add a condition to the &lt;incoming&gt; block that only processes data if is_ready(lul_device) is true.
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="lua source-lua"><pre class="de1"><span class="sy0">&lt;</span>incoming<span class="sy0">&gt;</span>
+    <span class="kw1">if</span> <span class="br0">(</span>luup.is_ready<span class="br0">(</span>lul_device<span class="br0">)</span> <span class="sy0">==</span> <span class="kw1">false</span><span class="br0">)</span> <span class="kw1">then</span>
+        <span class="kw1">return</span>
+    <span class="kw1">end</span>
+&nbsp;
+    doSomething<span class="br0">(</span>lul_device<span class="br0">)</span>
+<span class="sy0">&lt;/</span>incoming<span class="sy0">&gt;</span></pre></div></div>
+<h3> <span class="mw-headline" id="function:_call_action"> function: call_action  </span></h3>
+<p>parameters: service (string), action (string), arguments (table), <a href="http://wiki.micasaverde.com/index.php/Luup_Lua_extensions#device:_string_or_number" title="Luup Lua extensions">device (string or number)</a> 
+</p><p>returns: error (number), error_msg (string), job (number), arguments (table) 
+</p><p>Invokes the UPnP service + action, passing in the arguments (table of string-&gt;string pairs) to the device. If the invocation could not be made, only <i>error</i> will be returned with a value of -1. Otherwise, all 4 values are returned. <i>error</i> is 0 if the UPnP device reported the action was successful. <i>arguments</i> is a table of string-&gt;string pairs with the return arguments from the action. If the action is handled asynchronously by a Luup job, then the job number will be returned as a positive integer.
+</p>
+<table style="border: 1px solid Gold; background-color: LightGoldenRodYellow" cellpadding="0" cellspacing="5">
+
+<tbody><tr>
+<td style="text-align: center; width: 24px"><a href="http://wiki.micasaverde.com/index.php/File:Warning.png" class="image"><img alt="Warning.png" src="./luup_files/Warning.png" width="24" height="24"></a>
+</td>
+<td style="text-align: left;">Currently only Z-Wave and Insteon jobs are returned in the <i>job</i> parameter.
+</td></tr></tbody></table>
+<p>Example to dim device #5 to 50%:<br> 
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="lua source-lua"><pre class="de1"><span class="kw1">local</span> resultCode, resultString, job, returnArguments <span class="sy0">=</span> luup.call_action<span class="br0">(</span><span class="st0">"urn:upnp-org:serviceId:Dimming1"</span>, <span class="st0">"SetLoadLevelTarget"</span>, <span class="br0">{</span><span class="br0">[</span><span class="st0">"newLoadlevelTarget"</span><span class="br0">]</span> <span class="sy0">=</span> <span class="st0">"50"</span><span class="br0">}</span>, <span class="nu0">5</span><span class="br0">)</span></pre></div></div>
+<p><br>
+</p>
+<h3> <span class="mw-headline" id="function:_variable_set"> function: variable_set  </span></h3>
+<p>parameters: service (string), variable (string), value (string), <a href="http://wiki.micasaverde.com/index.php/Luup_Lua_extensions#device:_string_or_number" title="Luup Lua extensions">device (string or number)</a>, [startup (bool)] 
+</p><p>returns: nothing 
+</p><p>The UPnP 'service' + 'variable' will be set to the 'value' for this device. If there are events or notifications tied to the variable they will be fired. 
+</p><p>The device parameter: if it's a string, is interpreted as a udn.  If it's a number, it's interpreted as a device number.
+</p><p>Optionally, you can add an argument 'startup'. If startup is true, this change will be considered a startup value, and if the variable is set to it's existing value, events and notifications will <i>not</i> be fired. 
+</p>
+<h3> <span class="mw-headline" id="function:_variable_get"> function: variable_get  </span></h3>
+<p>parameters: service (string), variable (string), <a href="http://wiki.micasaverde.com/index.php/Luup_Lua_extensions#device:_string_or_number" title="Luup Lua extensions">device (string or number)</a> 
+</p><p>returns: value (string) and Unix time stamp (number) of when the variable last changed
+</p><p>Returns the value of the UPnP service + variable and the time when the variable was last modified, as a unix time stamp (number of seconds since 1/1/1970). If the service+variable or device does not exist, it returns nothing.<br> 
+</p><p><a href="http://wiki.micasaverde.com/index.php?title=Example_usage&amp;action=edit&amp;redlink=1" class="new" title="Example usage (page does not exist)">Example usage</a>
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="lua source-lua"><pre class="de1"><span class="kw1">local</span> value, tstamp <span class="sy0">=</span> luup.variable_get<span class="br0">(</span><span class="st0">"urn:upnp-org:serviceId:Dimming1"</span>, <span class="st0">"LoadLevelTarget"</span>, <span class="nu0">5</span><span class="br0">)</span>
+luup.<span class="kw1">log</span><span class="br0">(</span><span class="st0">"Dim level for device #5 is: "</span> .. value .. <span class="st0">" last changed (Epoch): "</span> .. tstamp<span class="br0">)</span></pre></div></div>
+<p>The device parameter: if it's a string, is interpreted as a udn.  If it's a number, it's interpreted as a device number.
+</p><p><a href="http://wiki.micasaverde.com/index.php?title=Caution_-_Incorrect_usages&amp;action=edit&amp;redlink=1" class="new" title="Caution - Incorrect usages (page does not exist)">Caution - Incorrect usages</a>
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="lua source-lua"><pre class="de1"><span class="kw1">local</span> value <span class="sy0">=</span> <span class="kw1">tonumber</span><span class="br0">(</span>luup.variable_get<span class="br0">(</span><span class="st0">"urn:upnp-org:serviceId:Dimming1"</span>, <span class="st0">"LoadLevelTarget"</span>, <span class="nu0">5</span><span class="br0">)</span><span class="br0">)</span></pre></div></div>
+<p><code>luup.variable_get</code> returns two parameters and <code>tonumber</code> also accepts two parameters. However the parameters are incompatible: the Unix timestamp returned by <code>luup.variable_get</code> is being used as a number base in the function <code>tonumber</code>. The number base is limited to a power of 36 or less and the current timestamps are in the range of thousands of millions.
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="lua source-lua"><pre class="de1"><span class="kw1">local</span> value <span class="sy0">=</span> <span class="kw1">tostring</span><span class="br0">(</span>luup.variable_get<span class="br0">(</span><span class="st0">"urn:upnp-org:serviceId:Dimming1"</span>, <span class="st0">"LoadLevelTarget"</span>, <span class="nu0">5</span><span class="br0">)</span><span class="br0">)</span></pre></div></div>
+<p><code>luup.variable_get</code> returns two parameters and <code>tostring</code> only expects one
+</p>
+<h3> <span class="mw-headline" id="function:_attr_set"> function: attr_set  </span></h3>
+<p>parameters: attribute (string), value(string), <a href="http://wiki.micasaverde.com/index.php/Luup_Lua_extensions#device:_string_or_number" title="Luup Lua extensions">device (string or number)</a> 
+</p><p>returns: none 
+</p><p>Sets the top level attribute for the device to value. Examples of attributes are 'mac', 'name', 'id', etc.  Like attr_get, if the device is zero it sets the top-level user_data json tag.
+</p>
+<h3> <span class="mw-headline" id="function:_attr_get"> function: attr_get  </span></h3>
+<p>parameters: attribute (string), <a href="http://wiki.micasaverde.com/index.php/Luup_Lua_extensions#device:_string_or_number" title="Luup Lua extensions">device (string or number)</a> 
+</p><p>returns: string or none  (note: none means nothing at all. It does not mean 'nil')
+</p><p>Gets the top level attribute for the device.  Examples of attributes are 'mac', 'name', 'id', etc.  If the attribute doesn't exist, it returns nothing.  If the number 0 is passed in for device, it gets the top level attribute from the master userdata, like firmware_version.
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="lua source-lua"><pre class="de1"><span class="co1">-- This code logs nil if theDeviceNumber is invalid.</span>
+<span class="kw1">local</span> theName <span class="sy0">=</span> luup.attr_get <span class="br0">(</span><span class="st0">'name'</span>, theDeviceNumber<span class="br0">)</span>
+luup.<span class="kw1">log</span><span class="br0">(</span>theName<span class="br0">)</span>
+<span class="kw1">return</span> <span class="kw1">true</span></pre></div></div>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="lua source-lua"><pre class="de1"><span class="co1">-- This code fails if theDeviceNumber is invalid.</span>
+luup.<span class="kw1">log</span><span class="br0">(</span>luup.attr_get <span class="br0">(</span><span class="st0">'name'</span>, theDeviceNumber<span class="br0">)</span><span class="br0">)</span>
+<span class="kw1">return</span> <span class="kw1">true</span></pre></div></div>
+<h3> <span class="mw-headline" id="function:_ip_set"> function: ip_set </span></h3>
+<p><i><span style="color: red">Not available in UI5 or lower</span></i>
+</p><p>parameters: value (string), <a href="http://wiki.micasaverde.com/index.php/Luup_Lua_extensions#device:_string_or_number" title="Luup Lua extensions">device (string or number)</a>
+</p><p>returns: none
+</p><p>Sets the IP address for a device.  This is better than setting the "ip" attribute using attr_set because it updates internal values additionally, so a reload isn't required.
+</p>
+<h3> <span class="mw-headline" id="function:_mac_set"> function: mac_set </span></h3>
+<p><i><span style="color: red">Not available in UI5 or lower</span></i>
+</p><p>parameters: value (string), device (string or number)
+</p><p>returns: none
+</p><p>Sets the mac address for a device.  This is better than setting the "mac" attribute using attr_set because it updates internal values additionally, so a reload isn't required.
+</p>
+<h3> <span class="mw-headline" id="function:_reload"> function: reload </span></h3>
+<p><i><span style="color: red">Not available in UI5 or lower</span></i>
+</p><p>parameters: none
+</p><p>returns: none
+</p><p>Reloads the Luup engine.
+</p>
+<h3> <span class="mw-headline" id="function:_create_device"> function: create_device </span></h3>
+<p><i><span style="color: red">Not available in UI5 or lower</span></i>
+</p><p>parameters:
+</p>
+<ul><li> <b>device_type</b> (string)&nbsp;: This is the device type and should be set to an empty string, so it will be retrieved from the UPnP device file.
+</li><li> <b>internal_id</b> (string)&nbsp;: This is the device <b>altid</b>.
+</li><li> <b>description</b> (string)&nbsp;: This is the device name.
+</li><li> <b>upnp_file</b> (string)&nbsp;: This is the UPnP device file.
+</li><li> <b>upnp_impl</b> (string)&nbsp;: This is the implementation file.
+</li><li> <b>ip</b> (string)
+</li><li> <b>mac</b> (string)
+</li><li> <b>hidden</b> (boolean)
+</li><li> <b>invisible</b> (boolean)
+</li><li> <b>parent</b> (number)&nbsp;: The device ID of the parent device. Set it to '0' if this device shouldn't have any parents.
+</li><li> <b>room</b> (number)&nbsp;: The room ID. If set to '0', the device won't be put in any room.
+</li><li> <b>pluginnum</b> (number)&nbsp;: Which plugin to install after the device is created. Set it to '0' if no plugin should be installed.
+</li><li> <b>statevariables</b> (string)&nbsp;: Variables and attributes you want set when the device is created. You can specify multiple variables by separating them with a line feed (\n) and use '<code>,</code>' and '<code>=</code>' to separate service, variable and value, like this: <code>service,variable=value\nservice,variable=value</code>
+</li></ul>
+<p>To set an attribute, leave "service" empty, like this: <code>,variable=value</code>
+</p>
+Example: <div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="lua source-lua"><pre class="de1"><span class="st0">"urn:upnp-org:serviceId:TemperatureSensor1,CurrentTemperature=50<span class="es0">\n</span>,manufacturer=MiOS"</span></pre></div></div>
+<ul><li> <b>pnpid</b> (number)&nbsp;: If this is a device from KitDevice.json, this is the <i>PK_KitDevice</i> number. Otherwise set this to '0'.
+</li><li> <b>nochildsync</b> (string)&nbsp;: If set to "1", ignore this device when syncing child devices. Unless you know what you're doing, set it to an empty string.
+</li><li> <b>aeskey</b> (string)&nbsp;: This should be set to an empty string.
+</li><li> <b>reload</b> (boolean)&nbsp;: If <i>true</i>, the Luup engine will be restarted after the device is created.
+</li><li> <b>nodupid</b> (boolean)&nbsp;: Set this to <i>false</i>.
+</li></ul>
+<p>returns: the device ID
+</p>
+<table style="border: 1px solid Gold; background-color: LightGoldenRodYellow" cellpadding="0" cellspacing="5">
+
+<tbody><tr>
+<td style="text-align: center; width: 24px"><a href="http://wiki.micasaverde.com/index.php/File:Warning.png" class="image"><img alt="Warning.png" src="./luup_files/Warning.png" width="24" height="24"></a>
+</td>
+<td style="text-align: left;">All parameters are mandatory.
+</td></tr></tbody></table>
+<table style="border: 1px solid Red; background-color: #FFE5D5" cellpadding="0" cellspacing="5">
+
+<tbody><tr>
+<td style="text-align: center; width: 24px"><a href="http://wiki.micasaverde.com/index.php/File:Important.png" class="image"><img alt="Important.png" src="./luup_files/Important.png" width="24" height="24"></a>
+</td>
+<td style="text-align: left;"><tt>device_type</tt> <b>MUST</b> be either an <b>empty string</b>, or <b>the same</b> as the one in the device file, otherwise the Luup engine will restart continuously.
+</td></tr></tbody></table><br>
+<p>This creates the device with the parameters given, and returns the device ID.
+</p>
+Example: <div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="lua source-lua"><pre class="de1">luup.create_device<span class="br0">(</span><span class="st0">""</span>, <span class="st0">"testdevice"</span>, <span class="st0">"Test Device"</span>, <span class="st0">"D_BinaryLight1.xml"</span>, <span class="st0">""</span>, <span class="st0">""</span>, <span class="st0">""</span>, <span class="kw1">false</span>, <span class="kw1">false</span>, <span class="nu0">0</span>, <span class="nu0">0</span>, <span class="nu0">0</span>, <span class="st0">",manufacturer=MiOS"</span>, <span class="nu0">0</span>, <span class="st0">""</span>, <span class="st0">""</span>, <span class="kw1">true</span>, <span class="kw1">false</span><span class="br0">)</span></pre></div></div>
+<p><br>
+</p>
+<h3> <span class="mw-headline" id="function:_device_message"> function: device_message </span></h3>
+<p><i><span style="color: red">Available in releases after Feb 2017</span></i>
+</p><p>This adds a system message that is attached to a device and appears in the UI under the device.
+</p><p>parameters:
+</p>
+<ul><li> <b>device_id</b> (number)&nbsp;: This is the device id number
+</li><li> <b>status</b> (int)&nbsp;: This is the status of message, and corresponds to the job status, and generally determines what color the message appears:
+<ul><li> -1&nbsp;: No job: black message
+</li><li>  0&nbsp;: Job waiting to start: <span style="color: blue">blue</span> message
+</li><li>  1&nbsp;: Job in progress: <span style="color: blue">blue</span> message
+</li><li>  2&nbsp;: Job error: <span style="color: red">red</span> message
+</li><li>  3&nbsp;: Job aborted: <span style="color: red">red</span> message
+</li><li>  4&nbsp;: Job done: <span style="color: green">green</span> message
+</li><li>  5&nbsp;: Job waiting for callback: <span style="color: blue">blue</span> message
+</li><li>  6&nbsp;: Job requeue: <span style="color: blue">blue</span> message
+</li><li>  7&nbsp;: Job in progress with pending data: black message
+</li></ul>
+</li><li> <b>message</b> (string)&nbsp;: This is the text that appears in the message.
+</li><li> <b>timeout</b> (int)&nbsp;: This is the number of seconds to display the message.  Pass 0 to display it indefinitely
+</li><li> <b>source</b> (string)&nbsp;: This is the source module of the message.  It can be anything, and is generally informational.  It is recommended to use the name of the luup plugin.
+</li></ul>
+<p>return: nothing
+</p>
+<table style="border: 1px solid Gold; background-color: LightGoldenRodYellow" cellpadding="0" cellspacing="5">
+
+<tbody><tr>
+<td style="text-align: center; width: 24px"><a href="http://wiki.micasaverde.com/index.php/File:Warning.png" class="image"><img alt="Warning.png" src="./luup_files/Warning.png" width="24" height="24"></a>
+</td>
+<td style="text-align: left;">All parameters are mandatory.
+</td></tr></tbody></table>
+<p><br>
+</p>
+<h3> <span class="mw-headline" id="function:_register_handler"> function: register_handler  </span></h3>
+<p>parameters: function_name (string), request_name (string) 
+</p><p>returns: nothing 
+</p><p>When a certain URL is requested from a web browser or other HTTP get, function_name will be called and whatever string and content_type it returns will be returned. 
+</p><p>See the Smartphone Web Interface plugin as an example:<br> 
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="lua source-lua"><pre class="de1">luup.register_handler<span class="br0">(</span><span class="st0">"lug_WapRequest"</span>,<span class="st0">"wap"</span><span class="br0">)</span>
+&nbsp;
+<span class="kw1">function</span> lug_WapRequest <span class="br0">(</span>lul_request, lul_parameters, lul_outputformat<span class="br0">)</span>
+    <span class="kw1">local</span> lul_html <span class="sy0">=</span> <span class="st0">"&lt;head&gt;<span class="es0">\n</span>"</span> ..
+                     <span class="st0">"&lt;title&gt;Main&lt;/title&gt;<span class="es0">\n</span>"</span> ..
+                     <span class="st0">"&lt;/head&gt;<span class="es0">\n</span>"</span> ..
+                     <span class="st0">"&lt;body&gt;<span class="es0">\n</span>"</span> ..
+                     <span class="st0">"Choose a room:&lt;br/&gt;<span class="es0">\n</span>"</span>
+    <span class="kw1">local</span> lul_content_type <span class="sy0">=</span> <span class="st0">"text/html"</span>
+    <span class="kw1">return</span> lul_html, lul_content_type
+<span class="kw1">end</span></pre></div></div> 
+<p>The request is made with the URL: data_request?id=lr_[the registered name] on port 49451. So: <a rel="nofollow" class="external free" href="http://192.168.1.1:49451/data_request?id=lr_wap">http://192.168.1.1:49451/data_request?id=lr_wap</a> will return the web page defined in the function lug_WapRequest in the example above.
+</p>
+<h3> <span class="mw-headline" id="function:_variable_watch"> function: variable_watch  </span></h3>
+<p>parameters: function_name (string), service (string), variable (string or nil), <a href="http://wiki.micasaverde.com/index.php/Luup_Lua_extensions#device:_string_or_number" title="Luup Lua extensions">device (string or number)</a>
+</p><p>returns: nothing 
+</p><p>Whenever the UPnP variable is changed for the specified device, which if a string is interpreted as a UDN and if a number as a device ID, <i>function_name</i> will be called. See <a href="http://wiki.micasaverde.com/index.php/Luup_Declarations#watch_callback" title="Luup Declarations">Luup Declarations#watch_callback</a> for the values that will be passed to <i>function_name</i>. If variable is nil, <i>function_name</i> will be called whenever any variable in the service is changed. 
+</p>
+<h3> <span class="mw-headline" id="function:_job_watch"> function: job_watch  </span></h3>
+<p>parameters: function_name (string), <a href="http://wiki.micasaverde.com/index.php/Luup_Lua_extensions#device:_string_or_number" title="Luup Lua extensions">device (string or number)</a>
+</p><p>returns: nothing 
+</p><p>Whenever a job is created, finished, or changes state then <i>function_name</i> will be called.  If the device is nil or not specified, <i>function_name</i> will be called for all jobs, otherwise only for jobs that involve the specified device.
+</p><p>Example:
+</p>
+<pre> luup.job_watch("mycallback")
+ luup.job_watch("mycallback",6)
+</pre>
+<p>The first one registers a callback for all devices, the second one only for device 6.  Note that multiple registrations will result in multiple callbacks, so two calls like that means that "mycallback" would be called once for all devices except 6, and for 6 it would be called twice.
+</p><p>The callback function will be passed a table which contains:
+</p><p>device_num: the number of the device
+</p><p>status: the job status, 0-7 as follows
+</p>
+<pre> WaitingToStart=0
+ InProgress=1
+ Error=2
+ Aborted=3
+ Done=4
+ WaitingForCallback=5
+ Requeue=6
+ InProgressPendingData=7
+</pre>
+<p>name: the name of the job
+</p><p>type: the C++ class name for the type of job
+</p><p>notes: any notes or progress that set for the job
+</p><p>Here is an example of the callback:
+</p>
+<pre> function mycallback(lul_job)
+   luup.log("mycallback device #" .. lul_job.device_num .. " status " .. lul_job.status .. " name " .. lul_job.name .. " type " .. lul_job.type .. " notes " .. lul_job.notes);
+ end
+</pre>
+<p>and here is the output in LuaUPnP.log from the above function when it is registered to watch a ZWave device which was turned ON:
+</p>
+<pre> 50      07/09/14 17:43:43.491   luup_log:3: mycallback device #6 status 0 name ON node 2 type ZWJob_SendData notes  &lt;00E998D0&gt;
+ 50      07/09/14 17:43:43.492   luup_log:3: mycallback device #6 status 1 name ON node 2 type ZWJob_SendData notes  &lt;00E93328&gt;
+ 50      07/09/14 17:43:43.493   luup_log:3: mycallback device #6 status 7 name ON node 2 type ZWJob_SendData notes Sending the Z-Wave command after 0 retries &lt;00E93328&gt;
+ 50      07/09/14 17:43:43.520   luup_log:3: mycallback device #6 status 5 name ON node 2 type ZWJob_SendData notes Waiting for node to reply after 0 retries &lt;00E93328&gt;
+ 50      07/09/14 17:43:43.543   luup_log:3: mycallback device #6 status 0 name ON node 2 type ZWJob_SendData notes Waiting to send again with ack &lt;00E92A58&gt;
+ 50      07/09/14 17:43:43.544   luup_log:3: mycallback device #6 status 1 name ON node 2 type ZWJob_SendData notes Waiting to send again with ack &lt;00E93328&gt;
+ 50      07/09/14 17:43:43.545   luup_log:3: mycallback device #6 status 7 name ON node 2 type ZWJob_SendData notes Sending the Z-Wave command after 0 retries &lt;00E93328&gt;
+ 50      07/09/14 17:43:43.576   luup_log:3: mycallback device #6 status 5 name ON node 2 type ZWJob_SendData notes Waiting for node to reply after 0 retries &lt;00E93328&gt;
+ 50      07/09/14 17:43:43.631   luup_log:3: mycallback device #6 status 4 name ON node 2 type ZWJob_SendData notes Transmit was ok &lt;00E92A58&gt;
+</pre>
+<h3> <span class="mw-headline" id="function:_devices_by_service"> function: devices_by_service  </span></h3>
+<p>parameters: 
+</p><p>returns: 
+</p>
+<h3> <span class="mw-headline" id="function:_device_supports_service"> function: device_supports_service  </span></h3>
+<p>parameters: service ID (string), <a href="http://wiki.micasaverde.com/index.php/Luup_Lua_extensions#device:_string_or_number" title="Luup Lua extensions">device (string or number)</a>
+</p><p>returns: <i>true</i> if the device supports the service, <i>false</i> otherwise
+</p><p>A device supports a service if there is at least a command or state variable defined for that device using that service. Setting UPnP variables is unrestricted and free form, and the engine doesn't really know if a device actually uses it or does anything with it. So this function isn't really definitive.
+</p>
+<h3> <span class="mw-headline" id="function:_set_failure"> function: set_failure  </span></h3>
+<p>parameters: value (int), <a href="http://wiki.micasaverde.com/index.php/Luup_Lua_extensions#device:_string_or_number" title="Luup Lua extensions">device (string or number)</a>
+</p><p>returns: 
+</p><p>Luup maintains a 'failure' flag for every device to indicate if it is not functioning. You can set the flag to 1 if the device is failing, 0 if it's working, and 2 if the device is reachable but there's an authentication error. If device is a string it is interpreted as a udn, if it's a number, as a device id. The lu_status URL will show for the device: &lt;tooltip display="1" tag2="Lua Failure"/&gt; and Lua Failure is shown in red in UI5 for the device.
+</p>
+<h3> <span class="mw-headline" id="function:_is_night"> function: is_night  </span></h3>
+<p>parameters: none 
+</p><p>returns: <i>true</i> if it's past sunset and before sunrise, <i>false</i> otherwise.
+</p>
+<h3> <span class="mw-headline" id="function:_sleep"> function: sleep  </span></h3>
+<p>parameters: number of milliseconds 
+</p><p>returns: none 
+</p><p>Sleeps a certain number of milliseconds
+</p>
+<h3> <span class="mw-headline" id="function:_sunset_.2F_sunrise"> function: sunset / sunrise </span></h3>
+<p>parameters: none
+</p><p>returns: The next sunset / sunrise in a Unix timestamp (i.e. the number of seconds since 1/1/1970 in UTC time). You can do a diff with os.time to see how long it will be for the next event.  luup.sunset-os.time is the number of seconds before the next sunset. Be sure the location and timezone are properly set or the sunset/sunrise will be wrong.
+</p><p>required firmware: 1.5.353
+</p>
+<h2> <span class="mw-headline" id="Module:_luup.inet"> Module: luup.inet  </span></h2>
+<h3> <span class="mw-headline" id="function:_wget"> function: wget  </span></h3>
+<p>parameters: URL (String), Timeout (Number), Username (String), Password (String) 
+</p><p>returns: operationStatusCode (Number), content (String), httpStatusCode (Number)
+</p><p>This reads the URL and returns 3 variables: the first is a numeric error code which is 0 if successful. The second variable is a string containing the contents of the page. The third variable is the HTTP status code. If <b>Timeout</b> is specified, the function will timeout after that many seconds. The default value for <b>Timeout</b> is 5 seconds. If <b>Username</b> and <b>Password</b> are specified, they will be used for HTTP Basic Authentication. 
+</p><p><br>
+</p>
+<h2> <span class="mw-headline" id="Module:_luup.chdev"> Module: luup.chdev  </span></h2>
+<p>Contains functions for a parent to synchronize its child devices. Whenever a device has multiple end-points, the devices are represented in a parent/child fashion where the parent device is responsible for reporting what child devices it has and giving each one a unique id. For example in the sample <a href="http://wiki.micasaverde.com/index.php/Luup_Somfy_Walkthrough" title="Luup Somfy Walkthrough">Luup Somfy Walkthrough</a> there is a parent device, which is the interface module that controls up to 16 blinds, and up to 16 child devices, one for each blind. As shown in that sample, the parent calls start, then enumerates each child device with append, and finally calls sync. You will need to pass the same value for device to append and sync that you passed to start. 
+</p>
+<h3> <span class="mw-headline" id="function:_start"> function: start  </span></h3>
+<p>parameters: <a href="http://wiki.micasaverde.com/index.php/Luup_Lua_extensions#device:_string_or_number" title="Luup Lua extensions">device (string or number)</a> 
+</p><p>returns: ptr (binary object) 
+</p><p>Tells Luup you will start enumerating the children of device. If device is a string it is interpreted as a udn, if it's a number, as a device id. The return value is a binary object which you cannot do anything with in Lua, but you do pass it to the append and sync functions. 
+</p>
+<h3> <span class="mw-headline" id="function:_append"> function: append  </span></h3>
+<p>parameters:
+</p>
+<ul><li> <a href="http://wiki.micasaverde.com/index.php/Luup_Lua_extensions#device:_string_or_number" title="Luup Lua extensions">device (string or number)</a>
+</li><li> ptr (binary object)
+</li><li> id (string)
+</li><li> description (string)
+</li><li> device_type (string)
+</li><li> device_filename (string)
+</li><li> implementation_filename (string)
+</li><li> parameters (string)
+</li><li> embedded (boolean)
+</li><li> [invisible (boolean)] optional
+</li></ul>
+<p>returns: nothing 
+</p><p>Adds one child to device.
+</p><p>Pass in the ptr which you received from the <tt>uup.chdev.start</tt> call. Give each child a unique id so you can keep track of which is which. You can optionally provide a description which the user sees in the user interface.
+</p><p><tt>device_type</tt> is the UPnP device type, such as <i>urn:schemas-upnp-org:device:BinaryLight:1</i>.
+</p>
+<table style="border: 1px solid Red; background-color: #FFE5D5" cellpadding="0" cellspacing="5">
+
+<tbody><tr>
+<td style="text-align: center; width: 24px"><a href="http://wiki.micasaverde.com/index.php/File:Important.png" class="image"><img alt="Important.png" src="./luup_files/Important.png" width="24" height="24"></a>
+</td>
+<td style="text-align: left;">On UI7, the <tt>device_type</tt> <b>MUST</b> be either the <b>empty string</b>, or <b>the same</b> as the one in the device file, otherwise the Luup engine will restart continuously.
+</td></tr></tbody></table>
+<p>If <tt>device_filename</tt> is specified, that is the name of the XML file with the UPnP device specification. If the <tt>device_file</tt> contains the implementation file for this child device you do not need to specify it in <tt>implementation_filename</tt>. Otherwise, if there is a Luup implementation for this child device and it's not being handled by the parent device, you can specify it in <tt>implementation_filename</tt>. The <tt>deviceType</tt> from the filename will override any <tt>device_type</tt> you set manually <i>(<b>NOTE</b>: This applies only for UI5 and older UIs.)</i>.
+</p><p>If <tt>embedded</tt> is true, the <i>embedded</i> flag is set for the device which generally means that the parent and all the children will be displayed as one compound device, or group, rather than as separate devices which you can put in their own rooms. 
+</p><p>The <tt>parameters</tt> are UPnP service,variables you want set when the device is created. You can specify multiple variables by separating them with a line feed (\n) and use a, and = to separate service, variable and value, like this: service,variable=value\nservice...
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="lua source-lua"><pre class="de1">luup.chdev.append<span class="br0">(</span>device, children,
+    <span class="kw1">string.format</span><span class="br0">(</span><span class="st0">"Input-%d"</span>, i<span class="br0">)</span>, <span class="kw1">string.format</span><span class="br0">(</span><span class="st0">"Input&nbsp;%d"</span>, i<span class="br0">)</span>,
+    <span class="st0">"urn:schemas-micasaverde-com:device:TemperatureSensor:1"</span>, <span class="st0">"D_TemperatureSensor1.xml"</span>,
+    <span class="st0">""</span>, <span class="st0">"urn:upnp-org:serviceId:TemperatureSensor1,CurrentTemperature=50"</span>, <span class="kw1">true</span><span class="br0">)</span></pre></div></div>
+<h3> <span class="mw-headline" id="function:_sync"> function: sync  </span></h3>
+<p>parameters: <a href="http://wiki.micasaverde.com/index.php/Luup_Lua_extensions#device:_string_or_number" title="Luup Lua extensions">device (string or number)</a>, ptr (binary object), 
+</p><p>returns: nothing 
+</p><p>Pass in the ptr which you received from the start function. Tells the Luup engine you have finished enumerating the child devices. If the child devices have changed in any way, the new device tree will be written to the configuration file and the Luup engine is reset. 
+</p>
+<h2> <span class="mw-headline" id="Module:_io"> Module: io  </span></h2>
+<p>io.open<br>
+io.write<br>
+io.intercept<br>
+io.read<br>
+io.is_connected
+</p>
+<h3> <span class="mw-headline" id="function:_open"> function: open  </span></h3>
+<p>parameters: <a href="http://wiki.micasaverde.com/index.php/Luup_Lua_extensions#device:_string_or_number" title="Luup Lua extensions">device (string or number)</a>, ip (string), port (as number or string), 
+</p><p>returns: nothing 
+</p><p>This opens a socket on 'port' to 'ip' and stores the handle to the socket in 'device'. The opening of a socket can take time depending on the network, and a Luup function should return quickly whenever possible because each top-level device's Lua implementation runs in a single thread. So the actual opening of the socket occurs asynchronously and this function returns nothing. You will know that the socket opening failed if your subsequent call to write fails. 
+</p><p>Generally you do not need to call the open function because the socket is usually started automatically when the Luup engine starts. This is because the user typically either (a) associates a device with the destination io device, such as selecting an RS232 port for an alarm panel, where the RS232 is proxied by a socket, or (b) because the configuration settings for the device already include an IP address and port.
+</p><p>There is no 'function: close'.
+</p>
+<h3> <span class="mw-headline" id="function:_write"> function: write  </span></h3>
+<p>parameters: data (string), <a href="http://wiki.micasaverde.com/index.php/Luup_Lua_extensions#device:_string_or_number" title="Luup Lua extensions">optional device (string or number)</a> 
+</p><p>returns: result (boolean or nil) 
+</p><p>The device id defaults to self, if omitted. In Lua a string can contain binary data, so data may be a binary block. This sends data on the socket that was opened automatically or with the open function above, and associated to 'device'. If the socket is not already open, write will wait up to 5 seconds for the socket before it returns an error. Result is 'true' if the data was sent successfully, and is 'false' or nil if an error occurred.
+</p><p>The written data is modified depending upon the value of the <a href="http://wiki.micasaverde.com/index.php/Luup_Plugins_ByHand#.3Cprotocol.3E" title="Luup Plugins ByHand">&lt;protocol&gt; tag</a>.
+</p>
+<h3> <span class="mw-headline" id="function:_intercept"> function: intercept  </span></h3>
+<p>parameters: <a href="http://wiki.micasaverde.com/index.php/Luup_Lua_extensions#device:_string_or_number" title="Luup Lua extensions">device (string or number)</a> 
+</p><p>returns: nothing 
+</p><p>Normally when data comes in on a socket (I/O Port), the block of data is first passed to any pending jobs that are running for the device and are marked as 'waiting for data'. If there are none, or if none of the jobs' incoming data handlers report that they consumed (i.e. processed) the data, then the block of data is passed to the general 'incoming' function handler for the device. If you want to bypass this normal mechanism and read data directly from the socket, call intercept first to tell Luup you want to read incoming data with the read function. This is generally used during the initialization or startup sequences for devices. For example, you may need to send some data (a), receive some response (b), send some more data (c), receive another response (d), etc. In this case you would call 'intercept' first, then send a, then call read and confirm you got b, then call intercept again, then send c, then read d, and so on. 
+</p><p>You can call the read function without calling intercept and any incoming data will be returned by that function after it's called. The reason why you generally must call intercept is because normally you want to send some data and get a response. If you write the code like this <i>send(data) data=read()</i> then it's possible the response will arrive in the brief moment between the execution of send() and read(), and therefore get sent to the incoming data handler for the device. Intercept tells Luup to buffer any incoming data until the next read, bypassing the normal incoming data handler. So <i>intercept() send(data) data=read()</i> ensures that read will always get the response. If the device you're communicating with sends unsolicited data then there's the risk that the data you read is not the response you're looking for. If so, you can manually pass the response packet to the incoming data handler. 
+</p>
+<ul><li><ul><li>TBD: Add a function to do this**
+</li></ul>
+</li></ul>
+<h3> <span class="mw-headline" id="function:_read"> function: read  </span></h3>
+<p>parameters: timeout (number), <a href="http://wiki.micasaverde.com/index.php/Luup_Lua_extensions#device:_string_or_number" title="Luup Lua extensions">device (string or number)</a> 
+</p><p>returns: data (string) 
+</p><p>This reads a block of data from the socket. You must have called <i>intercept</i> previously so the data is passed. The time unit for <i>timeout</i> is seconds.<br>
+</p>
+<h3> <span class="mw-headline" id="function:_is_connected"> function: is_connected  </span></h3>
+<p>parameters: <a href="http://wiki.micasaverde.com/index.php/Luup_Lua_extensions#device:_string_or_number" title="Luup Lua extensions">device (string or number)</a> 
+</p><p>returns: connected (boolean) 
+</p><p>This function returns true if there is a valid IO port connected, otherwise returns false. Unplugging the LAN cable associated with the port, will not set the flag to false.
+</p>
+<h2> <span class="mw-headline" id="Module:_luup.job"> Module: luup.job  </span></h2>
+<h3> <span class="mw-headline" id="function:_status"> function: status  </span></h3>
+<p>parameters: job_number (number), <a href="http://wiki.micasaverde.com/index.php/Luup_Lua_extensions#device:_string_or_number" title="Luup Lua extensions">device (string or number)</a> 
+</p><p>returns: job_status (number), notes (string) 
+</p><p>If <b>job_number</b> is invalid the function returns <i>-1</i>. If <b>device</b> is a string it is interpreted as an UDN, if it's a number, as a device ID.
+</p><p>This is the list with all job statuses and their meaning:
+</p>
+<ul><li> <b>-1</b>: No job, i.e. job doesn't exist.
+</li><li>  <b>0</b>: Job waiting to start.
+</li><li>  <b>1</b>: Job in progress.
+</li><li>  <b>2</b>: Job error.
+</li><li>  <b>3</b>: Job aborted.
+</li><li>  <b>4</b>: Job done.
+</li><li>  <b>5</b>: Job waiting for callback. Used in special cases.
+</li><li>  <b>6</b>: Job requeue. If the job was aborted and needs to be started, use this special value.
+</li><li>  <b>7</b>: Job in progress with pending data. This means the job is waiting for data, but can't take it now.
+</li></ul>
+<h3> <span class="mw-headline" id="function:_set"> function: set  </span></h3>
+<p>parameters: job (userdata), setting (string), value (string) 
+</p><p>returns: nothing 
+</p><p>This stores a setting for a job. 
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="lua source-lua"><pre class="de1"><span class="sy0">&lt;</span>job<span class="sy0">&gt;</span>
+    luup.job.set<span class="br0">(</span>lul_job, <span class="st0">"comments"</span>, <span class="st0">"In progress..."</span><span class="br0">)</span>
+    <span class="kw1">local</span> comments <span class="sy0">=</span> luup.job.setting<span class="br0">(</span>lul_job, <span class="st0">"comments"</span><span class="br0">)</span>
+    luup.<span class="kw1">log</span><span class="br0">(</span><span class="st0">"job comments = "</span> .. comments<span class="br0">)</span>
+<span class="sy0">&lt;/</span>job<span class="sy0">&gt;</span></pre></div></div>
+<h3> <span class="mw-headline" id="function:_setting"> function: setting  </span></h3>
+<p>parameters: job (userdata), setting (string) 
+</p><p>returns: value (string) 
+</p><p>This returns a setting for a job.
+</p>
+<h2> <span class="mw-headline" id="Notes"> Notes </span></h2>
+<h3> <span class="mw-headline" id="device:_string_or_number"> device: string or number </span></h3>
+<ul><li>If a number, it is the device ID
+</li><li>If a string, it is the UDN for the UPnP device
+</li></ul>
+<p>Both of these can be found in the User Interface (UI5) under the advanced Tab as "id" and "local_udn" respectively.
+</p><p>Examples:
+</p>
+<div dir="ltr" class="mw-geshi" style="text-align: left;"><div class="lua source-lua"><pre class="de1"><span class="kw1">local</span> update_frequency <span class="sy0">=</span> luup.variable_get<span class="br0">(</span><span class="st0">"S_WebcamDropboxUploaderSettings1.xml"</span>,<span class="st0">"SendFrequency"</span>,<span class="nu0">87</span><span class="br0">)</span>
+<span class="kw1">local</span> update_frequency <span class="sy0">=</span> luup.variable_get<span class="br0">(</span><span class="st0">"S_WebcamDropboxUploaderSettings1.xml"</span>,<span class="st0">"SendFrequency"</span>,<span class="st0">"uuid:4d494342-5342-5645-0057-000001c9d682"</span><span class="br0">)</span></pre></div></div>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 443/1000000
+Post‐expand include size: 1381/2097152 bytes
+Template argument size: 480/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key micasaverde_wiki:pcache:idhash:467-0!*!0!!en!2!* and timestamp 20170310055916 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://wiki.micasaverde.com/index.php?title=Luup_Lua_extensions&amp;oldid=8309">http://wiki.micasaverde.com/index.php?title=Luup_Lua_extensions&amp;oldid=8309</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id="catlinks" class="catlinks"><div id="mw-normal-catlinks" class="mw-normal-catlinks"><a href="http://wiki.micasaverde.com/index.php/Special:Categories" title="Special:Categories">Category</a>: <ul><li><a href="http://wiki.micasaverde.com/index.php/Category:Development" title="Category:Development">Development</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://wiki.micasaverde.com/index.php?title=Special:UserLogin&amp;returnto=Luup+Lua+extensions" title="You are encouraged to log in; however, it is not mandatory [ctrl-option-o]" accesskey="o">Log in</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li id="ca-nstab-main" class="selected"><span><a href="http://wiki.micasaverde.com/index.php/Luup_Lua_extensions" title="View the content page [ctrl-option-c]" accesskey="c">Page</a></span></li>
+					<li id="ca-talk"><span><a href="http://wiki.micasaverde.com/index.php/Talk:Luup_Lua_extensions" title="Discussion about the content page [ctrl-option-t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+	<h4>
+		</h4>
+	<h5><span>Variants</span><a href="http://wiki.micasaverde.com/index.php/Luup_Lua_extensions#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="http://wiki.micasaverde.com/index.php/Luup_Lua_extensions">Read</a></span></li>
+					<li id="ca-viewsource"><span><a href="http://wiki.micasaverde.com/index.php?title=Luup_Lua_extensions&amp;action=edit" title="This page is protected.
+You can view its source [ctrl-option-e]" accesskey="e">View source</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://wiki.micasaverde.com/index.php?title=Luup_Lua_extensions&amp;action=history" title="Past revisions of this page [ctrl-option-h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="http://wiki.micasaverde.com/index.php/Luup_Lua_extensions#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="http://wiki.micasaverde.com/index.php" id="searchform">
+				<div>
+			<input type="search" name="search" title="Search MiCasaVerde [ctrl-option-f]" accesskey="f" id="searchInput">			<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton">			<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton">					<input type="hidden" name="title" value="Special:Search">
+		</div>
+	</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(http://wiki.micasaverde.com/siglawiki.jpg);" href="http://wiki.micasaverde.com/index.php/Main_Page" title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id="p-navigation">
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage-description"><a href="http://wiki.micasaverde.com/index.php/Main_Page" title="Visit the main page [ctrl-option-z]" accesskey="z">Main page</a></li>
+			<li id="n-portal"><a href="http://wiki.micasaverde.com/index.php/MiCasaVerde:Community_portal" title="About the project, what you can do, where to find things">Community portal</a></li>
+			<li id="n-currentevents"><a href="http://wiki.micasaverde.com/index.php/MiCasaVerde:Current_events" title="Find background information on current events">Current events</a></li>
+			<li id="n-recentchanges"><a href="http://wiki.micasaverde.com/index.php/Special:RecentChanges" title="A list of recent changes in the wiki [ctrl-option-r]" accesskey="r">Recent changes</a></li>
+			<li id="n-randompage"><a href="http://wiki.micasaverde.com/index.php/Special:Random" title="Load a random page [ctrl-option-x]" accesskey="x">Random page</a></li>
+			<li id="n-help"><a href="http://wiki.micasaverde.com/index.php/Help:Contents" title="The place to find out">Help</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id="p-tb">
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://wiki.micasaverde.com/index.php/Special:WhatLinksHere/Luup_Lua_extensions" title="A list of all wiki pages that link here [ctrl-option-j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://wiki.micasaverde.com/index.php/Special:RecentChangesLinked/Luup_Lua_extensions" title="Recent changes in pages linked from this page [ctrl-option-k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://wiki.micasaverde.com/index.php/Special:SpecialPages" title="A list of all special pages [ctrl-option-q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://wiki.micasaverde.com/index.php?title=Luup_Lua_extensions&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://wiki.micasaverde.com/index.php?title=Luup_Lua_extensions&amp;oldid=8309" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 13 February 2017, at 14:50.</li>
+											<li id="footer-info-viewcount">This page has been accessed 229,439 times.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="http://wiki.micasaverde.com/index.php/MiCasaVerde:Privacy_policy" title="MiCasaVerde:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="http://wiki.micasaverde.com/index.php/MiCasaVerde:About" title="MiCasaVerde:About">About MiCasaVerde</a></li>
+											<li id="footer-places-disclaimer"><a href="http://wiki.micasaverde.com/index.php/MiCasaVerde:General_disclaimer" title="MiCasaVerde:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="./luup_files/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31"></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<script src="./luup_files/load(4).php"></script>
+<script>if(window.mw){
+mw.loader.load(["mediawiki.user","mediawiki.page.ready"], null, true);
+}</script><script src="./luup_files/load(5).php" type="text/javascript"></script>
+<!-- Served in 10.810 secs. -->
+	
+
+</body></html>
