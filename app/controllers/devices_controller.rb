@@ -1,6 +1,6 @@
 class DevicesController < ApplicationController
   before_action :authenticate_user!
-  
+
   def index
     @devices = Device.all
     respond_to do |format|

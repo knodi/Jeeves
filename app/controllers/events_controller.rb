@@ -4,7 +4,7 @@ class EventsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @events = @device.events.order('id DESC').limit(20) unless @device.nil?
+    @events = @device.events.limit(20) unless @device.nil?
     respond_to do |format|
       format.json { render json: @events.to_json }
       format.html
@@ -13,7 +13,7 @@ class EventsController < ApplicationController
 
   def new
     if params[:label].blank? || @device.blank?
-      render nothing: true
+      head :bad_request
     else
       event = Event.new(label: params[:label], device_id: @device.id)
       event.save
@@ -29,8 +29,7 @@ class EventsController < ApplicationController
 
   def respeak
     SpeechEngine.say(@event.pretty_label)
-  ensure
-    redirect_back fallback_location: root_path
+    head :ok # pure remote method, don't care about success
   end
 
   private
