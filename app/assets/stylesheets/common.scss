@@ -1,12 +1,38 @@
 /* styles common to all pages */
-.standard_table {
-  border-collapse: collapse;
+$top_gray:    #eaeaea; // (234,234,234)
+$blueish:     #e3fffd; // (227,255,253)
+$pinkish:     #fff3f3; // (255,243,243)
+$bottom_gray: #e7e7e7; // (231,231,231)
 
+.standard_table {
   td, th { border: solid black 1px; padding: 5px }
 }
 
-footer {
+header#header {
+  height: 40px;
+  background-color: $blueish;
+  border-bottom: solid gray 1px;
+  margin-bottom: 10px;
+  h1 { 
+    font-weight: bold; 
+    font-size: 1.4em;
+    color: #000; 
+    width: 100%; 
+    padding: 10px;
+  }
+
+  .logout { float: right; margin: 10px 20px; }
+}
+
+main#main {
+  padding: 10px;
+}
+
+footer#footer {
+  height: 40px;
   margin-top: 50px;
-  padding-top: 10px;
-  border-top: solid black 1px;
+  padding: 10px;
+  border-top: solid gray 1px;
+  background-color: $pinkish;
+  color: #000;
 }

@@ -1,20 +1,31 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Jeeves</title>
-    <%= csrf_meta_tags %>
+<head>
+  <title>Jeeves</title>
+  <%= csrf_meta_tags %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
 
-  <body>
+<body>
+  
+  <header id="header">
+    <% if user_signed_in? %>
+      <%= link_to('Logout', destroy_user_session_path, method: :delete, class: 'logout') %>        
+    <% end %>
+    <h1>Jeeves Home Automation Server</h1>
+  </header>
+  <main id="main">
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
+    
     <%= yield %>
-  </body>
-  <footer>
+  </main>
+  <footer id="footer">
     Jeeves&reg; version <%= APP_VERSION %> <br />
     Rendered <%= Time.now.in_time_zone.strftime('%h %d at %I:%M %P') %>
   </footer>
+
+</body>
 </html>
