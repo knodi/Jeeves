@@ -16,7 +16,7 @@ class Event < ApplicationRecord
   end
 
   def pretty_label
-    return label unless device.class::POSSIBLE_EVENTS
+    return label unless (defined? device.class::POSSIBLE_EVENTS)
     return label unless label.match?(/^:/)
     pretty_label = device.class::POSSIBLE_EVENTS[label[1..-1].to_sym] % device.name.humanize
     pretty_label || label
