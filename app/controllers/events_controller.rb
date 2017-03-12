@@ -21,8 +21,10 @@ class EventsController < ApplicationController
         render text: "Error: #{event.errors.to_a.inspect}"
       else
         render text: 'Registered'
-        logger.debug "About to speak the sentence #{event.pretty_label.inspect}"
-        SpeechEngine.say(event.pretty_label, volume: proper_volume)
+        if @device.speak_events?
+          logger.debug "About to speak the sentence #{event.pretty_label.inspect}"
+          SpeechEngine.say(event.pretty_label, volume: proper_volume)
+        end
       end
     end
   end
