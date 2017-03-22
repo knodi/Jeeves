@@ -9,9 +9,10 @@ class Smartphone < Device
   }.freeze
 
   def at_home?
-    events.where(label: ':enter_home').first.created_at > events.where(label: ':exit_home').first.created_at
-  rescue
-    return false
+    enter_event = events.where(label: ':enter_home').first
+    exit_event  = events.where(label: ':exit_home').first
+
+    enter_event && exit_event && enter_event.created_at > exit_event.created_at
   end
 
   # colin phone - a0:8d:16:f3:83:1d
