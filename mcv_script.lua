@@ -1,3 +1,2 @@
 -- generic MCV lua script
-local status, result = luup.inet.wget("http://raspberrypi.local:3000/events/new?d=back%20door&l=back%20door%20open", 5, 'cknox', 'testing123')
-
+local status, result = luup.inet.wget("http://10.0.2.1/device/2/events/new?label=:open", 5, 'cknox', 'testing123')
