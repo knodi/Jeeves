@@ -40,9 +40,9 @@ class EventsController < ApplicationController
     return if params[:device_id].blank?
     @device = if params[:device_id].match?(/^\d+$/)
                 Device.find_by(id: params[:device_id])
-              else
-                Device.where(['MD5(name) like ?', params[:device_id]]).first
               end
+    @device ||= Device.where(['name like ?', params[:device_id]]).first
+    @device ||= Device.where(['MD5(name) like ?', params[:device_id]]).first
   end
 
   def load_event
