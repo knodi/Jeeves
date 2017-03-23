@@ -12,21 +12,24 @@ class EventsController < ApplicationController
   end
 
   def new
+    logger.warn "COLIN - HTTP Authorization header: #{request.headers['HTTP_AUTHORIZATION'].inspect}"
+    logger.warn "COLIN - decodes to #{Base64.decode64(request.headers['HTTP_AUTHORIZATION'].sub('Basic ', '')).inspect}" if request.headers['HTTP_AUTHORIZATION'].match?(/Basic /)
+
     if params[:label].blank? || @device.blank?
       head :bad_request
-    else
-      event = Event.new(label: params[:label], device_id: @device.id)
-      event.save
-      if event.errors.any?
-        render text: "Error: #{event.errors.to_a.inspect}"
-      else
-        render text: 'Registered'
-        if @device.speak_events?
-          logger.debug "About to speak the sentence #{event.pretty_label.inspect}"
-          SpeechEngine.say(event.pretty_label, volume: proper_volume)
-        end
-      end
+      return
     end
+
+    event = Event.new(label: params[:label], device_id: @device.id)
+    event.save
+
+    if event.errors.any?
+      render text: "Error: #{event.errors.to_a.inspect}"
+      return
+    end
+
+    render text: 'Registered'
+    SpeechEngine.say(event.pretty_label, volume: proper_volume) if @device.speak_events?
   end
 
   def respeak
