@@ -12,9 +12,6 @@ class EventsController < ApplicationController
   end
 
   def new
-    logger.warn "COLIN - HTTP Authorization header: #{request.headers['HTTP_AUTHORIZATION'].inspect}"
-    logger.warn "COLIN - decodes to #{Base64.decode64(request.headers['HTTP_AUTHORIZATION'].sub('Basic ', '')).inspect}" if request.headers['HTTP_AUTHORIZATION'].match?(/Basic /)
-
     if params[:label].blank? || @device.blank?
       head :bad_request
       return
