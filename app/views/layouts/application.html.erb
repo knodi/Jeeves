@@ -24,7 +24,11 @@
   </main>
   <footer id="footer">
     Jeeves&reg; version <%= APP_VERSION %> <br />
-    Rendered <%= Time.now.in_time_zone.strftime('%h %d at %I:%M %P') %>
+    Rendered
+    <% if current_user %>
+      for <%= current_user.username %>,
+    <% end %>
+    <%= Time.now.in_time_zone.strftime('%h %d at %I:%M %P') %>
   </footer>
 
 </body>
