@@ -29,12 +29,24 @@ class SpeechEngine
 
     private
 
+    #def speech_command(sentence = 'something happened')
+    #  case OS_LOOKUP[RUBY_PLATFORM]
+    #  when 'raspberrypi'
+    #    %(echo "#{sentence}" | festival --tts)
+    #  when 'osx'
+    #    %(say "#{sentence}")
+    #  end
+    #end
+
     def speech_command(sentence = 'thing happened')
+      file = Dir.glob(File.join(Rails.root, 'audio/*')).sample
+
       case OS_LOOKUP[RUBY_PLATFORM]
       when 'raspberrypi'
-        %(echo "#{sentence}" | festival --tts)
+        %(aplay "#{file}"
+        )
       when 'osx'
-        %(say "#{sentence}")
+        %(afplay "#{file}")
       end
     end
 
