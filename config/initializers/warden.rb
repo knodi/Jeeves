@@ -1,10 +1,13 @@
 Warden::Strategies.add(:ip_address) do
   #VERA_IP = '::1'
-  VERA_IP = '10.0.2.3'
+  VERA_IP = '10.0.1.46'
+  INTERNAL_IP = '10.0.1.'
 
   def valid?
     Rails.logger.info "Warden checking strategy ip_address against #{request.ip}"
+
     request.ip == VERA_IP
+    #request.ip[0..(INTERNAL_IP.length-1)] == INTERNAL_IP
   end
 
   def authenticate!
