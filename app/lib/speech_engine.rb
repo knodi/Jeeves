@@ -15,6 +15,14 @@ class SpeechEngine
       run_command speech_command(sentence)
     end
 
+    def random_sound(options = {})
+      if options[:volume] && options[:volume] != @volume
+        self.volume = options[:volume]
+      end
+
+      run_command random_sound_command
+    end
+
     def volume
       @volume
     end
@@ -29,22 +37,25 @@ class SpeechEngine
 
     private
 
-    #def speech_command(sentence = 'something happened')
-    #  case OS_LOOKUP[RUBY_PLATFORM]
-    #  when 'raspberrypi'
-    #    %(echo "#{sentence}" | festival --tts)
-    #  when 'osx'
-    #    %(say "#{sentence}")
-    #  end
-    #end
+    def speech_command(sentence = 'something happened')
+      case OS_LOOKUP[RUBY_PLATFORM]
+      when 'raspberrypi'
+        %(echo "#{sentence}" | festival --tts)
+      when 'osx'
+        %(say "#{sentence}")
+      end
+    end
 
-    def speech_command(sentence = 'thing happened')
+    def random_sound_command
       file = Dir.glob(File.join(Rails.root, 'audio/*')).sample
 
       case OS_LOOKUP[RUBY_PLATFORM]
       when 'raspberrypi'
-        %(aplay "#{file}"
-        )
+        if file.match?(/mp3$/)
+          %(mpg123 "#{file}")
+        else
+          %(aplay "#{file}")
+        end
       when 'osx'
         %(afplay "#{file}")
       end

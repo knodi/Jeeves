@@ -2,14 +2,18 @@ source 'https://rubygems.org'
 
 gem 'coffee-rails', '~> 4.2'
 gem 'devise'
+gem 'google-api-client', '~> 0.8'
 gem 'jquery-rails'
 gem 'listen', '~> 3.0.5'
 gem 'mysql2'
 gem 'puma', '~> 3.0'
 gem 'rails', '~> 5.0.1'
+# gem 'resque'
+# gem 'resque-scheduler'
 gem 'sass-rails', '~> 5.0'
 gem 'turbolinks', '~> 5'
 gem 'uglifier', '>= 1.3.0'
+gem 'whenever', require: false
 
 group :development do
   gem 'byebug'

@@ -26,7 +26,7 @@ class EventsController < ApplicationController
     end
 
     render text: 'Registered'
-    SpeechEngine.say(event.pretty_label, volume: proper_volume) if @device.speak_events?
+    SpeechEngine.random_sound if @device.speak_events?
   end
 
   def respeak
